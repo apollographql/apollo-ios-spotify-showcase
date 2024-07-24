@@ -1,8 +1,256 @@
-//
-//  AuthManager.swift
-//  ApolloSpotify
-//
-//  Created by Zach FettersMoore on 11/30/23.
-//
-
+import AuthenticationServices
+import CommonCrypto
 import Foundation
+
+actor AuthManager {
+  
+  // MARK: - Variables
+  
+  private let presentationAnchor = PresentationContextProvider()
+  
+  // MARK: - Authorization Request
+  
+  func authorizationRequest() async throws -> Bool {
+    let codeVerifier = codeVerifier()
+    let codeChallenge = codeChallenge(for: codeVerifier)
+    let state = UUID().uuidString
+    
+    guard let authURL = authURL(with: codeChallenge, state: state) else {
+      fatalError("Failed to build auth url.")
+    }
+    
+    return try await withCheckedThrowingContinuation { continuation in
+      let authSession = ASWebAuthenticationSession.init(
+        url: authURL,
+        callbackURLScheme: "apollo-ios-spotify-showcase") { responseURL, responseError in
+          guard responseError == nil else {
+            continuation.resume(throwing: OAuthError.authRequestFailed(responseError!))
+            return
+          }
+          
+          guard let url = responseURL else {
+            continuation.resume(throwing: OAuthError.noResponseURL)
+            return
+          }
+          
+          guard let code = url.getQueryStringParameter("code") else {
+            continuation.resume(throwing: OAuthError.noResponseCode)
+            return
+          }
+          
+          guard let responseState = url.getQueryStringParameter("state"),
+                responseState == state else {
+            continuation.resume(throwing: OAuthError.invalidState)
+            return
+          }
+          
+          // call to get access token
+          Task {
+            do {
+              let accessToken = try await self.requestAccessToken(authCode: code, codeVerifier: codeVerifier)
+              
+              //TODO: Store token in keychain
+              print("Access Token - \(accessToken.access_token)")
+              
+              continuation.resume(returning: true)
+            } catch {
+              continuation.resume(throwing: error)
+            }
+          }
+        }
+      
+      Task {
+        await MainActor.run {
+          authSession.presentationContextProvider = presentationAnchor
+          authSession.prefersEphemeralWebBrowserSession = true
+          authSession.start()
+        }
+      }
+    }
+  }
+  
+  private func authURL(
+    with codeChallenge: String,
+    state: String
+  ) -> URL? {
+    let queryItems = [
+      URLQueryItem(name: "response_type", value: "code"),
+      URLQueryItem(name: "client_id", value: Constants.clientID),
+      URLQueryItem(name: "scope", value: Constants.scopes),
+      URLQueryItem(name: "state", value: state),
+      URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+      URLQueryItem(name: "code_challenge", value: codeChallenge),
+      URLQueryItem(name: "code_challenge_method", value: "S256")
+    ]
+    
+    var urlComps = URLComponents(string: Constants.authURL)
+    urlComps?.queryItems = queryItems
+    return urlComps?.url
+  }
+  
+  // MARK: - Access Token Request
+  
+  func requestAccessToken(
+    authCode: String,
+    codeVerifier: String
+  ) async throws -> AccessTokenResponse {
+    guard let bodyData = tokenRequestBody(authCode: authCode, codeVerifier: codeVerifier) else {
+      fatalError()
+    }
+    
+    guard let tokenURL = URL(string: Constants.tokenURL) else {
+      fatalError()
+    }
+    
+    let headers: [String: String] = ["content-type": "application/x-www-form-urlencoded"]
+    var request = URLRequest(url: tokenURL)
+    request.httpMethod = "POST"
+    request.allHTTPHeaderFields = headers
+    request.httpBody = bodyData
+    
+    let (data, response) = try await URLSession.shared.data(for: request)
+    
+    let decoder = JSONDecoder()
+    
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+      let tokenErrorResponse = try decoder.decode(TokenErrorResponse.self, from: data)
+      throw OAuthError.tokenError(tokenErrorResponse)
+    }
+    
+    let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: data)
+    
+    return accessTokenResponse
+  }
+  
+  private func tokenRequestBody(
+    authCode: String,
+    codeVerifier: String
+  ) -> Data? {
+    let queryItems = [
+      URLQueryItem(name: "grant_type", value: "authorization_code"),
+      URLQueryItem(name: "code", value: authCode),
+      URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
+      URLQueryItem(name: "client_id", value: Constants.clientID),
+      URLQueryItem(name: "code_verifier", value: codeVerifier)
+    ]
+    
+    var urlComps = URLComponents()
+    urlComps.queryItems = queryItems
+    
+    return urlComps.query?.data(using: .utf8)
+  }
+  
+  // MARK: - Code Challenge
+  
+  private func codeVerifier() -> String {
+    var buffer = [UInt8](repeating: 0, count: 32)
+    _ = SecRandomCopyBytes(kSecRandomDefault, buffer.count, &buffer)
+    return Data(buffer)
+      .base64EncodedString()
+      .replacingOccurrences(of: "=", with: "")
+      .replacingOccurrences(of: "+", with: "-")
+      .replacingOccurrences(of: "/", with: "_")
+      .trimmingCharacters(in: .whitespaces)
+  }
+  
+  private func codeChallenge(for verifier: String) -> String {
+    guard let data = verifier.data(using: .utf8) else {
+      fatalError("Could not convert code verifier to data.")
+    }
+    var buffer = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+    data.withUnsafeBytes {
+      CC_SHA256($0, CC_LONG(data.count), &buffer)
+    }
+    
+    return Data(buffer)
+      .base64EncodedString()
+      .replacingOccurrences(of: "=", with: "")
+      .replacingOccurrences(of: "+", with: "-")
+      .replacingOccurrences(of: "/", with: "_")
+      .trimmingCharacters(in: .whitespaces)
+  }
+  
+}
+
+// MARK: - Constants
+
+struct Constants {
+  static let authURL = "https://accounts.spotify.com/authorize"
+  static let tokenURL = "https://accounts.spotify.com/api/token"
+  static let redirectURI = "apollo-ios-spotify-showcase://spotify-login-callback"
+  static let clientID = "9dd735b766a24ea192c773fac86caefa"
+  static let scopes = [
+    "playlist-modify-private",
+    "playlist-modify-public",
+    "playlist-read-collaborative",
+    "playlist-read-private",
+    "streaming",
+    "user-follow-modify",
+    "user-follow-read",
+    "user-library-modify",
+    "user-library-read",
+    "user-modify-playback-state",
+    "user-read-currently-playing",
+    "user-read-email",
+    "user-read-playback-position",
+    "user-read-playback-state",
+    "user-read-private",
+    "user-read-recently-played",
+    "user-top-read"
+  ].joined(separator: " ")
+}
+
+// MARK: - Responses and Errors
+
+enum OAuthError: LocalizedError {
+  case authRequestFailed(Error)
+  case invalidState
+  case noResponseCode
+  case noResponseURL
+  case tokenError(TokenErrorResponse)
+  
+  var errorDescription: String? {
+    switch self {
+    case .authRequestFailed(let error):
+      return "OAuth authorization request failed: \(error.localizedDescription)"
+    case .invalidState:
+      return "An invalid state was returned from the authorization request that did not match local state."
+    case .noResponseCode:
+      return "Authorization response did not return an authorization code."
+    case .noResponseURL:
+      return "Authorization response did not include a url."
+    case .tokenError(let tokenError):
+      return "Access token request failed: \(tokenError.error) - \(tokenError.error_description)"
+    }
+  }
+}
+
+struct TokenErrorResponse: Codable {
+  let error: String
+  let error_description: String
+}
+
+struct AccessTokenResponse: Codable {
+  let access_token: String
+  let token_type: String
+  let scope: String
+  let expires_in: Int
+  let refresh_token: String
+}
+
+// MARK: - PresentationContextProvider
+
+fileprivate class PresentationContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
+  func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+    return ASPresentationAnchor()
+  }
+}
+
+// MARK: - Extensions
+
+extension URL {
+  func getQueryStringParameter(_ parameter: String) -> String? {
+    guard let url = URLComponents(string: self.absoluteString) else { return nil }
+    return url.queryItems?.first(where: { $0.name == parameter })?.value
+  }
+}
