@@ -11,7 +11,7 @@ struct HomeView: View {
         do {
           _ = try await authManager.authorizationRequest()
         } catch {
-          print("OAuth Error - \(error)")
+          print("OAuth Error - \(error.localizedDescription)")
         }
       }
     }

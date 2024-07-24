@@ -24,7 +24,7 @@ actor AuthManager {
         url: authURL,
         callbackURLScheme: "apollo-ios-spotify-showcase") { responseURL, responseError in
           guard responseError == nil else {
-            continuation.resume(throwing: responseError!)
+            continuation.resume(throwing: OAuthError.authRequestFailed(responseError!))
             return
           }
           
@@ -40,8 +40,7 @@ actor AuthManager {
           
           guard let responseState = url.getQueryStringParameter("state"),
                 responseState == state else {
-            // TODO: more descriptive error
-            continuation.resume(throwing: OAuthError.unknown)
+            continuation.resume(throwing: OAuthError.invalidState)
             return
           }
           
@@ -111,12 +110,13 @@ actor AuthManager {
     
     let (data, response) = try await URLSession.shared.data(for: request)
     
+    let decoder = JSONDecoder()
+    
     guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-      // TODO: more descriptive error
-      throw OAuthError.unknown
+      let tokenErrorResponse = try decoder.decode(TokenErrorResponse.self, from: data)
+      throw OAuthError.tokenError(tokenErrorResponse)
     }
     
-    let decoder = JSONDecoder()
     let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: data)
     
     return accessTokenResponse
@@ -203,9 +203,31 @@ struct Constants {
 // MARK: - Responses and Errors
 
 enum OAuthError: LocalizedError {
+  case authRequestFailed(Error)
+  case invalidState
   case noResponseCode
   case noResponseURL
-  case unknown
+  case tokenError(TokenErrorResponse)
+  
+  var errorDescription: String? {
+    switch self {
+    case .authRequestFailed(let error):
+      return "OAuth authorization request failed: \(error.localizedDescription)"
+    case .invalidState:
+      return "An invalid state was returned from the authorization request that did not match local state."
+    case .noResponseCode:
+      return "Authorization response did not return an authorization code."
+    case .noResponseURL:
+      return "Authorization response did not include a url."
+    case .tokenError(let tokenError):
+      return "Access token request failed: \(tokenError.error) - \(tokenError.error_description)"
+    }
+  }
+}
+
+struct TokenErrorResponse: Codable {
+  let error: String
+  let error_description: String
 }
 
 struct AccessTokenResponse: Codable {
