@@ -9,7 +9,8 @@ struct HomeView: View {
     Button("Open Auth") {
       Task {
         do {
-          _ = try await authManager.authorizationRequest()
+          let token = try await authManager.getAccessToken()
+          print("Access token - \(token)")
         } catch {
           print("OAuth Error - \(error.localizedDescription)")
         }

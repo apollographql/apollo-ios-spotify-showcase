@@ -7,10 +7,18 @@ actor AuthManager {
   // MARK: - Variables
   
   private let presentationAnchor = PresentationContextProvider()
+  private var currentToken: AccessToken?
+  private var tokenRefreshTask: Task<AccessToken, Error>?
+  
+  // MARK: - Initialization
+  
+  init() {
+    currentToken = try? KeychainHandler.getToken()
+  }
   
   // MARK: - Authorization Request
   
-  func authorizationRequest() async throws -> Bool {
+  private func authorizationRequest() async throws -> AccessToken {
     let codeVerifier = codeVerifier()
     let codeChallenge = codeChallenge(for: codeVerifier)
     let state = UUID().uuidString
@@ -48,11 +56,7 @@ actor AuthManager {
           Task {
             do {
               let accessToken = try await self.requestAccessToken(authCode: code, codeVerifier: codeVerifier)
-              
-              //TODO: Store token in keychain
-              print("Access Token - \(accessToken.access_token)")
-              
-              continuation.resume(returning: true)
+              continuation.resume(returning: accessToken)
             } catch {
               continuation.resume(throwing: error)
             }
@@ -88,41 +92,40 @@ actor AuthManager {
     return urlComps?.url
   }
   
-  // MARK: - Access Token Request
+  // MARK: - Token Handling
   
-  func requestAccessToken(
-    authCode: String,
-    codeVerifier: String
-  ) async throws -> AccessTokenResponse {
-    guard let bodyData = tokenRequestBody(authCode: authCode, codeVerifier: codeVerifier) else {
-      fatalError()
+  func getAccessToken() async throws -> String {
+    // if refresh task is active, await the return of that
+    if let refreshTask = tokenRefreshTask {
+      return try await refreshTask.value.accessToken
     }
     
-    guard let tokenURL = URL(string: Constants.tokenURL) else {
-      fatalError()
+    guard let token = currentToken else {
+      return try await authorizationRequest().accessToken
     }
     
-    let headers: [String: String] = ["content-type": "application/x-www-form-urlencoded"]
-    var request = URLRequest(url: tokenURL)
-    request.httpMethod = "POST"
-    request.allHTTPHeaderFields = headers
-    request.httpBody = bodyData
-    
-    let (data, response) = try await URLSession.shared.data(for: request)
-    
-    let decoder = JSONDecoder()
-    
-    guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-      let tokenErrorResponse = try decoder.decode(TokenErrorResponse.self, from: data)
-      throw OAuthError.tokenError(tokenErrorResponse)
+    if token.isTokenValid() {
+      return token.accessToken
     }
     
-    let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: data)
-    
-    return accessTokenResponse
+    return try await refreshAccessToken().accessToken
   }
   
-  private func tokenRequestBody(
+  private func requestAccessToken(
+    authCode: String,
+    codeVerifier: String
+  ) async throws -> AccessToken {
+    print("Requesting Access Token...")
+    guard let bodyData = accessTokenRequestBody(authCode: authCode, codeVerifier: codeVerifier) else {
+      fatalError()
+    }
+    
+    let request = buildTokenRequest(with: bodyData)
+    let (data, response) = try await URLSession.shared.data(for: request)
+    return try processTokenAPIResponse(response, withData: data)
+  }
+  
+  private func accessTokenRequestBody(
     authCode: String,
     codeVerifier: String
   ) -> Data? {
@@ -138,6 +141,91 @@ actor AuthManager {
     urlComps.queryItems = queryItems
     
     return urlComps.query?.data(using: .utf8)
+  }
+  
+  private func refreshAccessToken() async throws -> AccessToken {
+    print("Refreshing Access Token...")
+    guard let currentToken = currentToken else {
+      throw OAuthError.missingToken
+    }
+    
+    if let refreshTask = tokenRefreshTask {
+      return try await refreshTask.value
+    }
+    
+    let task = Task { () throws -> AccessToken in
+      defer {
+        tokenRefreshTask = nil
+      }
+      
+      guard let bodyData = refreshTokenRequestBody(refreshToken: currentToken.refreshToken) else {
+        fatalError()
+      }
+      
+      let request = buildTokenRequest(with: bodyData)
+      let (data, response) = try await URLSession.shared.data(for: request)
+      return try processTokenAPIResponse(response, withData: data)
+    }
+    
+    tokenRefreshTask = task
+    
+    return try await task.value
+  }
+  
+  private func refreshTokenRequestBody(
+    refreshToken: String
+  ) -> Data? {
+    let queryItems = [
+      URLQueryItem(name: "grant_type", value: "refresh_token"),
+      URLQueryItem(name: "refresh_token", value: refreshToken),
+      URLQueryItem(name: "client_id", value: Constants.clientID)
+    ]
+    
+    var urlComps = URLComponents()
+    urlComps.queryItems = queryItems
+    
+    return urlComps.query?.data(using: .utf8)
+  }
+  
+  private func buildTokenRequest(
+    with bodyData: Data
+  ) -> URLRequest {
+    guard let tokenURL = URL(string: Constants.tokenURL) else {
+      fatalError()
+    }
+    
+    let headers: [String: String] = ["content-type": "application/x-www-form-urlencoded"]
+    var request = URLRequest(url: tokenURL)
+    request.httpMethod = "POST"
+    request.allHTTPHeaderFields = headers
+    request.httpBody = bodyData
+    
+    return request
+  }
+  
+  private func processTokenAPIResponse(
+    _ response: URLResponse,
+    withData data: Data
+  ) throws -> AccessToken {
+    let decoder = JSONDecoder()
+    
+    guard (response as? HTTPURLResponse)?.statusCode == 200 else {
+      let tokenErrorResponse = try decoder.decode(TokenErrorResponse.self, from: data)
+      throw OAuthError.tokenError(tokenErrorResponse)
+    }
+    
+    let accessToken = try decoder.decode(AccessToken.self, from: data)
+    currentToken = accessToken
+    do {
+      let keychainResult = try KeychainHandler.storeToken(accessToken)
+      if !keychainResult {
+        print("Failed to store access token in keyhchain.")
+      }
+    } catch {
+      print("Error storing access token in keychain: \(error)")
+    }
+    
+    return accessToken
   }
   
   // MARK: - Code Challenge
@@ -205,6 +293,7 @@ struct Constants {
 enum OAuthError: LocalizedError {
   case authRequestFailed(Error)
   case invalidState
+  case missingToken
   case noResponseCode
   case noResponseURL
   case tokenError(TokenErrorResponse)
@@ -215,6 +304,8 @@ enum OAuthError: LocalizedError {
       return "OAuth authorization request failed: \(error.localizedDescription)"
     case .invalidState:
       return "An invalid state was returned from the authorization request that did not match local state."
+    case .missingToken:
+      return "No token was found."
     case .noResponseCode:
       return "Authorization response did not return an authorization code."
     case .noResponseURL:
@@ -228,14 +319,6 @@ enum OAuthError: LocalizedError {
 struct TokenErrorResponse: Codable {
   let error: String
   let error_description: String
-}
-
-struct AccessTokenResponse: Codable {
-  let access_token: String
-  let token_type: String
-  let scope: String
-  let expires_in: Int
-  let refresh_token: String
 }
 
 // MARK: - PresentationContextProvider
