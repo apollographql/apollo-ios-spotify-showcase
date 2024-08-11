@@ -8,7 +8,7 @@ actor AuthManager {
   
   private let presentationAnchor = PresentationContextProvider()
   private var currentToken: AccessToken?
-  private var tokenRefreshTask: Task<AccessToken, Error>?
+  private var tokenTask: Task<AccessToken, Error>?
   
   // MARK: - Initialization
   
@@ -96,7 +96,7 @@ actor AuthManager {
   
   func getAccessToken() async throws -> String {
     // if refresh task is active, await the return of that
-    if let refreshTask = tokenRefreshTask {
+    if let refreshTask = tokenTask {
       return try await refreshTask.value.accessToken
     }
     
@@ -149,13 +149,13 @@ actor AuthManager {
       throw OAuthError.missingToken
     }
     
-    if let refreshTask = tokenRefreshTask {
+    if let refreshTask = tokenTask {
       return try await refreshTask.value
     }
     
     let task = Task { () throws -> AccessToken in
       defer {
-        tokenRefreshTask = nil
+        tokenTask = nil
       }
       
       guard let bodyData = refreshTokenRequestBody(refreshToken: currentToken.refreshToken) else {
@@ -167,7 +167,7 @@ actor AuthManager {
       return try processTokenAPIResponse(response, withData: data)
     }
     
-    tokenRefreshTask = task
+    tokenTask = task
     
     return try await task.value
   }
