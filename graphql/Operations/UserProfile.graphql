@@ -1,0 +1,11 @@
+query UserProfile {
+  me {
+    profile {
+      id
+      displayName
+      images {
+        url
+      }
+    }
+  }
+}

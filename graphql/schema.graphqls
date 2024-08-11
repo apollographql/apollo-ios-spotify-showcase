@@ -9,6 +9,8 @@ directive @synthetics(
   enabled: Boolean = true
 ) on FIELD
 
+directive @defer(label: String, if: Boolean! = true) on FRAGMENT_SPREAD | INLINE_FRAGMENT
+
 enum Action {
   INTERRUPTING_PLAYBACK
   PAUSING
@@ -1141,7 +1143,7 @@ type Playlist {
   **Note**: If returned, the source URL for the image (`url`) is temporary and
   will expire in less than a day.
   """
-  images: [Image!]!
+  images: [Image!]
 
   """The name of the playlist."""
   name: String!

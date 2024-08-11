@@ -1,0 +1,19 @@
+query UserPlaylists {
+  me {
+    playlists {
+      edges {
+        node {
+          ...PlaylistFragment
+        }
+      }
+    }
+  }
+}
+
+fragment PlaylistFragment on Playlist {
+  id
+  name
+  images {
+    url
+  }
+}

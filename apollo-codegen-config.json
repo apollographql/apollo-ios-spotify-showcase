@@ -1,0 +1,44 @@
+{
+  "schemaNamespace" : "SpotifyAPI",
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "**/*.graphqls"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./SpotifyAPI",
+      "moduleType" : {
+        "swiftPackageManager" : {
+        }
+      }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  },
+  "schemaDownload": {
+    "downloadMethod": {
+        "apolloRegistry": {
+            "_0": {
+                "graphID": "Spotify-iOS",
+                "apiKey": "service:Spotify-iOS:V9SJX472KwCK1UKkI6SmPg",
+                "variant": "current"
+            }
+        }
+    },
+    "downloadTimeout": 60,
+    "headers": {
+        "Accept-Encoding" : "gzip"
+    },
+    "outputPath": "./graphql/schema.graphqls"
+  }
+}
