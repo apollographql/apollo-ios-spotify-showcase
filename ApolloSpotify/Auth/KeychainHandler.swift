@@ -11,6 +11,7 @@ class KeychainHandler {
     kSecAttrService as String: tokenService
   ]
   
+  @discardableResult
   static func storeToken(_ token: AccessToken) throws -> Bool {
     let tokenData = try JSONEncoder().encode(token)
     var query = baseQuery
@@ -22,12 +23,7 @@ class KeychainHandler {
     if status == errSecDuplicateItem {
       let query = baseQuery
       let attributesToUpdate: [String: Any] = [kSecValueData as String: tokenData]
-      
       let updateStatus = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
-      
-      if let errMsg = SecCopyErrorMessageString(updateStatus, nil) as? String{
-          print(errMsg)
-      }
       return updateStatus == errSecSuccess
     }
 
@@ -47,5 +43,17 @@ class KeychainHandler {
     
     let token = try JSONDecoder().decode(AccessToken.self, from: data)
     return token
+  }
+  
+  @discardableResult
+  static func deleteToken() throws -> Bool {
+    let query = baseQuery
+    
+    let status = SecItemDelete(query as CFDictionary)
+    guard status == errSecSuccess || status == errSecItemNotFound else {
+      return false
+    }
+    
+    return true
   }
 }

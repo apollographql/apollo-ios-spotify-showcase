@@ -10,25 +10,23 @@ struct HomeView: View {
 
     VStack {
       Spacer()
-//      if let playlist = viewModel.playlists.first {
-//        HStack {
-//          Spacer()
-//          PlaylistCellView(playlist: playlist)
-//            .frame(height: 60)
-//          Spacer()
-//        }
-//      }
-      
-//      if viewModel.playlists.count > 0 {
+      Text("Playlists")
+        .font(.system(size: 18))
+        .frame(alignment: .leading)
       PlaylistGridView(playlists: $viewModel.playlists, numItems: 6)
-//      }
       
       Button("Get Profile") {
         
         Task {
-          viewModel.getUserProfile()
+          viewModel.fetchUserPlaylists()
         }
         
+      }
+      
+      Spacer()
+      
+      Button("Clear Keychain") {
+        _ = try? KeychainHandler.deleteToken()
       }
       
       Spacer()

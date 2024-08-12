@@ -1,0 +1,9 @@
+query FeaturedPlaylists {
+  featuredPlaylists {
+    edges {
+      node {
+        ...PlaylistFragment
+      }
+    }
+  }
+}
