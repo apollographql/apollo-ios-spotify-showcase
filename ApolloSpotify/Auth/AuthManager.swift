@@ -266,7 +266,6 @@ struct Constants {
   static let authURL = "https://accounts.spotify.com/authorize"
   static let tokenURL = "https://accounts.spotify.com/api/token"
   static let redirectURI = "apollo-ios-spotify-showcase://spotify-login-callback"
-  static let clientID = "9dd735b766a24ea192c773fac86caefa"
   static let scopes = [
     "playlist-modify-private",
     "playlist-modify-public",
@@ -286,6 +285,15 @@ struct Constants {
     "user-read-recently-played",
     "user-top-read"
   ].joined(separator: " ")
+  
+  static let clientID: String = {
+    if let path = Bundle.main.path(forResource: "ClientConfig", ofType: "plist"),
+       let config = NSDictionary(contentsOfFile: path),
+       let clientID = config["ClientID"] as? String {
+      return clientID
+    }
+    fatalError("Unable to get 'clientID' from 'ClientConfig.plist' please check you have created the plist file with the 'clientID' value.")
+  }()
 }
 
 // MARK: - Responses and Errors
