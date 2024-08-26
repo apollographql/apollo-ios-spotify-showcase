@@ -1,7 +1,7 @@
 import SwiftUI
 import SpotifyAPI
 
-struct PlaylistCellView: View {
+struct PlaylistGridCellView: View {
   
   let playlist: PlaylistFragment
   
@@ -17,6 +17,8 @@ struct PlaylistCellView: View {
         Spacer()
         Text(playlist.name)
           .font(.system(size: 12))
+          .foregroundStyle(.white)
+          .frame(maxWidth: .infinity, alignment: .leading)
         Spacer()
       }
       
@@ -27,5 +29,5 @@ struct PlaylistCellView: View {
 }
 
 //#Preview {
-//    PlaylistCellView()
+//    PlaylistGridCellView()
 //}

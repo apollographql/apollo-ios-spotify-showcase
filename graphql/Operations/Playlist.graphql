@@ -1,0 +1,49 @@
+query Playlist($playlistId: ID!) {
+  playlist(id: $playlistId) {
+    id
+    name
+    owner {
+      displayName
+      id
+      images {
+        url
+      }
+    }
+    images {
+      url
+    }
+    tracks {
+      edges {
+        addedAt
+        node {
+          id
+          name
+          durationMs
+          uri
+          ... on Episode {
+            show {
+              id
+              name
+              images {
+                url
+              }
+            }
+          }
+          ... on Track {
+            album {
+              id
+              name
+              images {
+                url
+              }
+            }
+            artists {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}

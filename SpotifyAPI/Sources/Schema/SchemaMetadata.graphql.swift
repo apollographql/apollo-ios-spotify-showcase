@@ -30,8 +30,15 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Image": return SpotifyAPI.Objects.Image
     case "FeaturedPlaylistConnection": return SpotifyAPI.Objects.FeaturedPlaylistConnection
     case "FeaturedPlaylistEdge": return SpotifyAPI.Objects.FeaturedPlaylistEdge
-    case "CurrentUserProfile": return SpotifyAPI.Objects.CurrentUserProfile
     case "User": return SpotifyAPI.Objects.User
+    case "CurrentUserProfile": return SpotifyAPI.Objects.CurrentUserProfile
+    case "PlaylistTrackConnection": return SpotifyAPI.Objects.PlaylistTrackConnection
+    case "PlaylistTrackEdge": return SpotifyAPI.Objects.PlaylistTrackEdge
+    case "Episode": return SpotifyAPI.Objects.Episode
+    case "Track": return SpotifyAPI.Objects.Track
+    case "Show": return SpotifyAPI.Objects.Show
+    case "Album": return SpotifyAPI.Objects.Album
+    case "Artist": return SpotifyAPI.Objects.Artist
     default: return nil
     }
   }

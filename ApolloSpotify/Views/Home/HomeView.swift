@@ -8,28 +8,30 @@ struct HomeView: View {
   
   var body: some View {
 
-    VStack {
-      Spacer()
-      Text("Playlists")
-        .font(.system(size: 18))
-        .frame(alignment: .leading)
-      PlaylistGridView(playlists: $viewModel.playlists, numItems: 6)
-      
-      Button("Get Profile") {
+    NavigationStack {
+      VStack {
+        Spacer()
+        Text("Playlists")
+          .font(.system(size: 18))
+          .frame(alignment: .leading)
+        PlaylistGridView(playlists: $viewModel.playlists, numItems: 6)
         
-        Task {
-          viewModel.fetchUserPlaylists()
+        Button("Get Profile") {
+          
+          Task {
+            viewModel.fetchUserPlaylists()
+          }
+          
         }
         
+        Spacer()
+        
+        Button("Clear Keychain") {
+          _ = try? KeychainHandler.deleteToken()
+        }
+        
+        Spacer()
       }
-      
-      Spacer()
-      
-      Button("Clear Keychain") {
-        _ = try? KeychainHandler.deleteToken()
-      }
-      
-      Spacer()
     }
     
   }
