@@ -1,0 +1,11 @@
+query Recommendations($seeds: RecommendationSeedInput!, $limit: Int) {
+  recommendations(seeds: $seeds, limit: $limit) {
+    seeds {
+      id
+      initialPoolSize
+    }
+    tracks {
+      ...TrackFragment
+    }
+  }
+}

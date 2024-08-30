@@ -4,16 +4,16 @@ import SwiftUI
 
 class PlaylistViewModel: ObservableObject {
   
-  var playlistID: SpotifyAPI.ID
+  let playlistID: SpotifyAPI.ID
   
   @Published var playlistImageURL: URL?
-  @Published var playlistName: String?
-  @Published var playlistAuthor: String?
+  @Published var playlistName: String = ""
+  @Published var playlistAuthor: String = ""
   @Published var playlistAuthorImageURL: URL?
   @Published var playlistLength: String = ""
-  @Published var playlistTracks = [PlaylistQuery.Data.Playlist.Tracks.Edge]() {
+  @Published var playlistTracks = [TrackFragment]() {
     didSet {
-      let milliseconds = playlistTracks.reduce(0) { $0 + $1.node.durationMs }
+      let milliseconds = playlistTracks.reduce(0) { $0 + $1.durationMs }
       let interval = TimeInterval(milliseconds / 1000)
       playlistLength = interval.hoursAndMinutes
     }
@@ -22,10 +22,10 @@ class PlaylistViewModel: ObservableObject {
   private var playlist: PlaylistQuery.Data.Playlist? {
     didSet {
       self.playlistImageURL = URL(string: playlist?.images?.first?.url ?? "")
-      self.playlistName = playlist?.name
-      self.playlistAuthor = playlist?.owner.displayName
+      self.playlistName = playlist?.name ?? ""
+      self.playlistAuthor = playlist?.owner.displayName ?? ""
       self.playlistAuthorImageURL = URL(string: playlist?.owner.images?.first?.url ?? "")
-      self.playlistTracks = playlist?.tracks.edges ?? []
+      self.playlistTracks = playlist?.tracks.edges.compactMap { $0.node.asTrack?.fragments.trackFragment } ?? []
     }
   }
   
@@ -48,6 +48,16 @@ class PlaylistViewModel: ObservableObject {
         print("Playlist Query Error - \(error)")
       }
     }
+  }
+  
+  func getRecommendationInput() -> RecommendationSeedInput {
+    var trackIDs = [SpotifyAPI.ID]()
+    
+    for i in 0..<min(5, playlistTracks.count) {
+      trackIDs.append(playlistTracks[i].id)
+    }
+    
+    return RecommendationSeedInput(seedTracks: .some(trackIDs))
   }
   
 }

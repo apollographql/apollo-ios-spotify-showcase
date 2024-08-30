@@ -16,32 +16,8 @@ query Playlist($playlistId: ID!) {
       edges {
         addedAt
         node {
-          id
-          name
-          durationMs
-          uri
-          ... on Episode {
-            show {
-              id
-              name
-              images {
-                url
-              }
-            }
-          }
-          ... on Track {
-            album {
-              id
-              name
-              images {
-                url
-              }
-            }
-            artists {
-              id
-              name
-            }
-          }
+          ...EpisodeFragment
+          ...TrackFragment
         }
       }
     }

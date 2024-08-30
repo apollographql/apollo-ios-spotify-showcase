@@ -1,13 +1,13 @@
 import SwiftUI
 import SpotifyAPI
 
-struct PlaylistTrackCellView: View {
+struct TrackCellView: View {
   
-  let playlistTrack: PlaylistQuery.Data.Playlist.Tracks.Edge.Node
+  let playlistTrack: TrackFragment
   
   var body: some View {
     HStack {
-      AsyncImage(url: URL(string: playlistTrack.asTrack?.album.images.first?.url ?? "")) { image in
+      AsyncImage(url: URL(string: playlistTrack.album.images.first?.url ?? "")) { image in
         image.resizable()
           .aspectRatio(contentMode: .fit)
       } placeholder: {
@@ -25,7 +25,7 @@ struct PlaylistTrackCellView: View {
           .fontWeight(.bold)
           .foregroundStyle(.white)
           .frame(maxWidth: .infinity, alignment: .leading)
-        Text(playlistTrack.asTrack?.artists.first?.name ?? "Artist")
+        Text(playlistTrack.artists.first?.name ?? "Artist")
           .font(.system(size: 12))
           .foregroundStyle(.white)
           .frame(maxWidth: .infinity, alignment: .leading)

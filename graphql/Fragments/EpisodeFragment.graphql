@@ -1,0 +1,13 @@
+fragment EpisodeFragment on Episode {
+  id
+  name
+  durationMs
+  uri
+  show {
+    id
+    name
+    images {
+      url
+    }
+  }
+}

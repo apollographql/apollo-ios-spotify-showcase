@@ -4,6 +4,7 @@ import SpotifyAPI
 struct PlaylistView: View {
   
   @StateObject private var viewModel: PlaylistViewModel
+  @State var addTracksPresented: Bool = false
   
   init(playlistID: SpotifyAPI.ID) {
     _viewModel = StateObject(wrappedValue: PlaylistViewModel(playlistID: playlistID))
@@ -35,7 +36,7 @@ struct PlaylistView: View {
       
       VStack {
         HStack {
-          Text(viewModel.playlistName ?? "Playlist Name")
+          Text(viewModel.playlistName)
             .fontWeight(.bold)
             .font(.system(size: 20))
             .foregroundStyle(.white)
@@ -59,7 +60,7 @@ struct PlaylistView: View {
               .padding(.trailing)
           }
           
-          Text(viewModel.playlistAuthor ?? "Playlist Author")
+          Text(viewModel.playlistAuthor)
             .fontWeight(.bold)
             .font(.system(size: 12))
             .foregroundStyle(.white)
@@ -84,6 +85,7 @@ struct PlaylistView: View {
       List {
         Button {
           print("Add Tracks")
+          addTracksPresented = true
         } label: {
           addTrackButtonView
         }
@@ -91,14 +93,20 @@ struct PlaylistView: View {
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
         .background(Color.init(hex: "121212"))
+        .sheet(isPresented: $addTracksPresented, content: {
+          PlaylistAddTracksView(
+            isPresented: $addTracksPresented,
+            recommendationInput: viewModel.getRecommendationInput()
+          )
+        })
 
         
         ForEach(0..<viewModel.playlistTracks.count, id: \.self) { index in
-          PlaylistTrackCellView(playlistTrack: viewModel.playlistTracks[index].node)
+          TrackCellView(playlistTrack: viewModel.playlistTracks[index])
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
             .onTapGesture {
-              print("Selected Track - \(viewModel.playlistTracks[index].node.name)")
+              print("Selected Track - \(viewModel.playlistTracks[index].name)")
             }
         }
       }

@@ -7,7 +7,8 @@ public class PlaylistQuery: GraphQLQuery {
   public static let operationName: String = "Playlist"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query Playlist($playlistId: ID!) { playlist(id: $playlistId) { __typename id name owner { __typename displayName id images { __typename url } } images { __typename url } tracks { __typename edges { __typename addedAt node { __typename id name durationMs uri ... on Episode { show { __typename id name images { __typename url } } } ... on Track { album { __typename id name images { __typename url } } artists { __typename id name } } } } } } }"#
+      #"query Playlist($playlistId: ID!) { playlist(id: $playlistId) { __typename id name owner { __typename displayName id images { __typename url } } images { __typename url } tracks { __typename edges { __typename addedAt node { __typename ...EpisodeFragment ...TrackFragment } } } } }"#,
+      fragments: [EpisodeFragment.self, TrackFragment.self]
     ))
 
   public var playlistId: ID
@@ -165,23 +166,9 @@ public class PlaylistQuery: GraphQLQuery {
             public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Interfaces.PlaylistTrack }
             public static var __selections: [ApolloAPI.Selection] { [
               .field("__typename", String.self),
-              .field("id", SpotifyAPI.ID.self),
-              .field("name", String.self),
-              .field("durationMs", Int.self),
-              .field("uri", String.self),
               .inlineFragment(AsEpisode.self),
               .inlineFragment(AsTrack.self),
             ] }
-
-            /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist track.
-            public var id: SpotifyAPI.ID { __data["id"] }
-            /// The name of the episode.
-            public var name: String { __data["name"] }
-            /// The playlist track length in milliseconds.
-            public var durationMs: Int { __data["durationMs"] }
-            /// The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-            /// for the playlist track.
-            public var uri: String { __data["uri"] }
 
             public var asEpisode: AsEpisode? { _asInlineFragment() }
             public var asTrack: AsTrack? { _asInlineFragment() }
@@ -196,60 +183,26 @@ public class PlaylistQuery: GraphQLQuery {
               public typealias RootEntityType = PlaylistQuery.Data.Playlist.Tracks.Edge.Node
               public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Episode }
               public static var __selections: [ApolloAPI.Selection] { [
-                .field("show", Show.self),
+                .fragment(EpisodeFragment.self),
               ] }
 
-              /// The show containing the episode.
-              public var show: Show { __data["show"] }
-              /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist track.
+              /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the episode.
               public var id: SpotifyAPI.ID { __data["id"] }
               /// The name of the episode.
               public var name: String { __data["name"] }
-              /// The playlist track length in milliseconds.
+              /// The episode length in milliseconds.
               public var durationMs: Int { __data["durationMs"] }
               /// The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-              /// for the playlist track.
+              /// for the episode.
               public var uri: String { __data["uri"] }
+              /// The show containing the episode.
+              public var show: EpisodeFragment.Show { __data["show"] }
 
-              /// Playlist.Tracks.Edge.Node.AsEpisode.Show
-              ///
-              /// Parent Type: `Show`
-              public struct Show: SpotifyAPI.SelectionSet {
+              public struct Fragments: FragmentContainer {
                 public let __data: DataDict
                 public init(_dataDict: DataDict) { __data = _dataDict }
 
-                public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Show }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("id", SpotifyAPI.ID.self),
-                  .field("name", String.self),
-                  .field("images", [Image].self),
-                ] }
-
-                /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-                /// for the show.
-                public var id: SpotifyAPI.ID { __data["id"] }
-                /// The name of the episode.
-                public var name: String { __data["name"] }
-                /// The cover art for the show in various sizes, widest first.
-                public var images: [Image] { __data["images"] }
-
-                /// Playlist.Tracks.Edge.Node.AsEpisode.Show.Image
-                ///
-                /// Parent Type: `Image`
-                public struct Image: SpotifyAPI.SelectionSet {
-                  public let __data: DataDict
-                  public init(_dataDict: DataDict) { __data = _dataDict }
-
-                  public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Image }
-                  public static var __selections: [ApolloAPI.Selection] { [
-                    .field("__typename", String.self),
-                    .field("url", String.self),
-                  ] }
-
-                  /// The source URL of the image.
-                  public var url: String { __data["url"] }
-                }
+                public var episodeFragment: EpisodeFragment { _toFragment() }
               }
             }
 
@@ -263,85 +216,28 @@ public class PlaylistQuery: GraphQLQuery {
               public typealias RootEntityType = PlaylistQuery.Data.Playlist.Tracks.Edge.Node
               public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Track }
               public static var __selections: [ApolloAPI.Selection] { [
-                .field("album", Album.self),
-                .field("artists", [Artist].self),
+                .fragment(TrackFragment.self),
               ] }
 
-              /// The album on which the track appears.
-              public var album: Album { __data["album"] }
-              /// The artists who performed the track.
-              public var artists: [Artist] { __data["artists"] }
-              /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the playlist track.
+              /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids) for the track.
               public var id: SpotifyAPI.ID { __data["id"] }
-              /// The name of the episode.
+              /// The name of the track
               public var name: String { __data["name"] }
-              /// The playlist track length in milliseconds.
+              /// The track length in milliseconds
               public var durationMs: Int { __data["durationMs"] }
               /// The [Spotify URI](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-              /// for the playlist track.
+              /// for the track.
               public var uri: String { __data["uri"] }
+              /// The artists who performed the track.
+              public var artists: [TrackFragment.Artist] { __data["artists"] }
+              /// The album on which the track appears.
+              public var album: TrackFragment.Album { __data["album"] }
 
-              /// Playlist.Tracks.Edge.Node.AsTrack.Album
-              ///
-              /// Parent Type: `Album`
-              public struct Album: SpotifyAPI.SelectionSet {
+              public struct Fragments: FragmentContainer {
                 public let __data: DataDict
                 public init(_dataDict: DataDict) { __data = _dataDict }
 
-                public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Album }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("id", SpotifyAPI.ID.self),
-                  .field("name", String.self),
-                  .field("images", [Image].self),
-                ] }
-
-                /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-                /// for the album.
-                public var id: SpotifyAPI.ID { __data["id"] }
-                /// The name of the album. In case of an album takedown, the value may be an empty
-                /// string.
-                public var name: String { __data["name"] }
-                /// The cover art for the album in various sizes, widest first.
-                public var images: [Image] { __data["images"] }
-
-                /// Playlist.Tracks.Edge.Node.AsTrack.Album.Image
-                ///
-                /// Parent Type: `Image`
-                public struct Image: SpotifyAPI.SelectionSet {
-                  public let __data: DataDict
-                  public init(_dataDict: DataDict) { __data = _dataDict }
-
-                  public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Image }
-                  public static var __selections: [ApolloAPI.Selection] { [
-                    .field("__typename", String.self),
-                    .field("url", String.self),
-                  ] }
-
-                  /// The source URL of the image.
-                  public var url: String { __data["url"] }
-                }
-              }
-
-              /// Playlist.Tracks.Edge.Node.AsTrack.Artist
-              ///
-              /// Parent Type: `Artist`
-              public struct Artist: SpotifyAPI.SelectionSet {
-                public let __data: DataDict
-                public init(_dataDict: DataDict) { __data = _dataDict }
-
-                public static var __parentType: ApolloAPI.ParentType { SpotifyAPI.Objects.Artist }
-                public static var __selections: [ApolloAPI.Selection] { [
-                  .field("__typename", String.self),
-                  .field("id", SpotifyAPI.ID.self),
-                  .field("name", String.self),
-                ] }
-
-                /// The [Spotify ID](https://developer.spotify.com/documentation/web-api/#spotify-uris-and-ids)
-                /// for the artist.
-                public var id: SpotifyAPI.ID { __data["id"] }
-                /// The name of the artist.
-                public var name: String { __data["name"] }
+                public var trackFragment: TrackFragment { _toFragment() }
               }
             }
           }

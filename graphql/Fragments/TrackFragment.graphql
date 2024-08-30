@@ -1,0 +1,17 @@
+fragment TrackFragment on Track {
+  id
+  name
+  durationMs
+  uri
+  artists {
+    id
+    name
+  }
+  album {
+    id
+    images {
+      url
+    }
+    name
+  }
+}

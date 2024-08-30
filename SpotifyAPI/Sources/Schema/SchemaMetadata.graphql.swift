@@ -23,22 +23,24 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
   public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
     case "Query": return SpotifyAPI.Objects.Query
+    case "Recommendations": return SpotifyAPI.Objects.Recommendations
+    case "RecommendationSeed": return SpotifyAPI.Objects.RecommendationSeed
+    case "Track": return SpotifyAPI.Objects.Track
+    case "Episode": return SpotifyAPI.Objects.Episode
+    case "Artist": return SpotifyAPI.Objects.Artist
+    case "Album": return SpotifyAPI.Objects.Album
+    case "Image": return SpotifyAPI.Objects.Image
     case "CurrentUser": return SpotifyAPI.Objects.CurrentUser
     case "PlaylistConnection": return SpotifyAPI.Objects.PlaylistConnection
     case "PlaylistEdge": return SpotifyAPI.Objects.PlaylistEdge
     case "Playlist": return SpotifyAPI.Objects.Playlist
-    case "Image": return SpotifyAPI.Objects.Image
     case "FeaturedPlaylistConnection": return SpotifyAPI.Objects.FeaturedPlaylistConnection
     case "FeaturedPlaylistEdge": return SpotifyAPI.Objects.FeaturedPlaylistEdge
     case "User": return SpotifyAPI.Objects.User
     case "CurrentUserProfile": return SpotifyAPI.Objects.CurrentUserProfile
     case "PlaylistTrackConnection": return SpotifyAPI.Objects.PlaylistTrackConnection
     case "PlaylistTrackEdge": return SpotifyAPI.Objects.PlaylistTrackEdge
-    case "Episode": return SpotifyAPI.Objects.Episode
-    case "Track": return SpotifyAPI.Objects.Track
     case "Show": return SpotifyAPI.Objects.Show
-    case "Album": return SpotifyAPI.Objects.Album
-    case "Artist": return SpotifyAPI.Objects.Artist
     default: return nil
     }
   }
