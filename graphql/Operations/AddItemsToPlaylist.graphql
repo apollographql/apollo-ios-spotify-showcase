@@ -1,0 +1,7 @@
+mutation AddItemsToPlaylist($input: AddItemsToPlaylistInput!) {
+  addItemsToPlaylist(input: $input) {
+    playlist {
+      id
+    }
+  }
+}

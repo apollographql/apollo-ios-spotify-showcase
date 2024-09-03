@@ -10,12 +10,14 @@ struct PlaylistAddTracksView: View {
   init(
     isPresented: Binding<Bool>,
     recommendationInput: RecommendationSeedInput,
-    recommendationLimit: GraphQLNullable<Int> = .null
+    recommendationLimit: GraphQLNullable<Int> = .null,
+    playlistID: SpotifyAPI.ID
   ) {
     _isPresented = isPresented
     _viewModel = StateObject(wrappedValue: PlaylistAddTracksViewModel(
       recommendationInput: recommendationInput,
-      recommendationLimit: recommendationLimit
+      recommendationLimit: recommendationLimit,
+      playlistID: playlistID
     ))
   }
   
@@ -45,6 +47,7 @@ struct PlaylistAddTracksView: View {
             .listRowSeparator(.hidden)
             .onTapGesture {
               print("Selected Track - \(viewModel.tracks[index].name)")
+              viewModel.addTrackToPlaylist(viewModel.tracks[index])
             }
         }
       }
