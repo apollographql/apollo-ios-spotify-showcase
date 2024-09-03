@@ -1,0 +1,7 @@
+mutation RemoveItemFromPlaylist($input: RemoveItemFromPlaylistInput!) {
+  removeItemFromPlaylist(input: $input) {
+    playlist {
+      id
+    }
+  }
+}

@@ -60,4 +60,25 @@ class PlaylistViewModel: ObservableObject {
     return RecommendationSeedInput(seedTracks: .some(trackIDs))
   }
   
+  func removeTrackFromPlaylist(_ track: TrackFragment) {
+    let removeTrackInput = RemoveItemFromPlaylistTrackInput(uri: track.uri)
+    let removeFromPlaylistInput = RemoveItemFromPlaylistInput(
+      playlistId: playlistID,
+      tracks: [removeTrackInput]
+    )
+    
+    Network.shared.apollo.perform(mutation: RemoveItemFromPlaylistMutation(input: removeFromPlaylistInput)) { result in
+      switch result {
+      case .success(let graphQLResult):
+        print("Successfully removed track from playlist - \(graphQLResult.data?.removeItemFromPlaylist?.playlist?.id)")
+        
+        if let errors = graphQLResult.errors {
+          print("RemoveItemFromPlaylistMutation errors - \(errors)")
+        }
+      case .failure(let error):
+        print("RemoveItemFromPlaylistMutation error - \(error)")
+      }
+    }
+  }
+  
 }

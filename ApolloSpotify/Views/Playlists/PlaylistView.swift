@@ -110,6 +110,10 @@ struct PlaylistView: View {
               print("Selected Track - \(viewModel.playlistTracks[index].name)")
             }
         }
+        .onDelete(perform: { indexSet in
+          print("Deleting track - \(viewModel.playlistTracks[indexSet.first!].name)")
+          viewModel.removeTrackFromPlaylist(viewModel.playlistTracks[indexSet.first!])
+        })
       }
       .listStyle(.plain)
       
