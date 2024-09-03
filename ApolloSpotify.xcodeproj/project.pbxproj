@@ -1,0 +1,834 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBB82B17DFEC004DD21F /* ApolloSpotifyApp.swift */; };
+		665BDBBD2B17DFED004DD21F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665BDBBC2B17DFED004DD21F /* Assets.xcassets */; };
+		665BDBC02B17DFED004DD21F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665BDBBF2B17DFED004DD21F /* Preview Assets.xcassets */; };
+		665BDBCA2B17DFED004DD21F /* ApolloSpotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBC92B17DFED004DD21F /* ApolloSpotifyTests.swift */; };
+		665BDBD42B17DFED004DD21F /* ApolloSpotifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */; };
+		665BDBD62B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */; };
+		669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7632C668C2A00475D71 /* PlaylistGridView.swift */; };
+		669ED7672C69298800475D71 /* Color+Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7662C69298800475D71 /* Color+Spotify.swift */; };
+		669ED76A2C73ECA400475D71 /* ClientConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 669ED7692C73ECA400475D71 /* ClientConfig.plist */; };
+		669ED76C2C7522E000475D71 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED76B2C7522E000475D71 /* PlaylistView.swift */; };
+		669ED76E2C75233300475D71 /* TrackCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED76D2C75233300475D71 /* TrackCellView.swift */; };
+		669ED7712C756C6800475D71 /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7702C756C6800475D71 /* PlaylistViewModel.swift */; };
+		669ED7732C7D14E200475D71 /* TimeInterval+Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7722C7D14E200475D71 /* TimeInterval+Spotify.swift */; };
+		669ED7762C7D216700475D71 /* PlaylistAddTracksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7752C7D216700475D71 /* PlaylistAddTracksView.swift */; };
+		669ED7782C7D301E00475D71 /* PlaylistAddTracksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7772C7D301E00475D71 /* PlaylistAddTracksViewModel.swift */; };
+		669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED77B2C86958100475D71 /* ActionMenuModalView.swift */; };
+		669ED7812C86978400475D71 /* ActionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7802C86978400475D71 /* ActionMenuItem.swift */; };
+		669ED7832C869F0E00475D71 /* TrackCellActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7822C869F0E00475D71 /* TrackCellActionView.swift */; };
+		66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A8D2C536CFB00ADE4F5 /* KeychainHandler.swift */; };
+		66B91A902C57585F00ADE4F5 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A8F2C57585F00ADE4F5 /* AccessToken.swift */; };
+		66B91A932C5EE73400ADE4F5 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66B91A922C5EE73400ADE4F5 /* SpotifyAPI */; };
+		66B91A962C5FFDCF00ADE4F5 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A952C5FFDCF00ADE4F5 /* Network.swift */; };
+		66B91A992C5FFDFC00ADE4F5 /* AuthorizationInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A972C5FFDFB00ADE4F5 /* AuthorizationInterceptor.swift */; };
+		66B91A9A2C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A982C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift */; };
+		66B91A9D2C6090BD00ADE4F5 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66B91A9C2C6090BD00ADE4F5 /* SpotifyAPI */; };
+		66B91AA02C619F7700ADE4F5 /* PlaylistGridCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A9F2C619F7700ADE4F5 /* PlaylistGridCellView.swift */; };
+		66B91AA22C61AE8000ADE4F5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91AA12C61AE8000ADE4F5 /* HomeViewModel.swift */; };
+		66BD33B92B17E4020045774E /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 66BD33B82B17E4020045774E /* Apollo */; };
+		66BD33BB2B17E4020045774E /* ApolloSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 66BD33BA2B17E4020045774E /* ApolloSQLite */; };
+		66BD33BD2B17E4020045774E /* ApolloTestSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 66BD33BC2B17E4020045774E /* ApolloTestSupport */; };
+		66BD33BF2B17E4020045774E /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 66BD33BE2B17E4020045774E /* ApolloWebSocket */; };
+		66BD33C12B17F50D0045774E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD33C02B17F50D0045774E /* MainTabView.swift */; };
+		66BD33C72B1905F20045774E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD33C62B1905F20045774E /* HomeView.swift */; };
+		66BD33CB2B1925810045774E /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BD33CA2B1925810045774E /* AuthManager.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		665BDBC62B17DFED004DD21F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 665BDBAD2B17DFEC004DD21F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 665BDBB42B17DFEC004DD21F;
+			remoteInfo = ApolloSpotify;
+		};
+		665BDBD02B17DFED004DD21F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 665BDBAD2B17DFEC004DD21F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 665BDBB42B17DFEC004DD21F;
+			remoteInfo = ApolloSpotify;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		665BDBB52B17DFEC004DD21F /* ApolloSpotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApolloSpotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		665BDBB82B17DFEC004DD21F /* ApolloSpotifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyApp.swift; sourceTree = "<group>"; };
+		665BDBBC2B17DFED004DD21F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		665BDBBF2B17DFED004DD21F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		665BDBC52B17DFED004DD21F /* ApolloSpotifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApolloSpotifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		665BDBC92B17DFED004DD21F /* ApolloSpotifyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyTests.swift; sourceTree = "<group>"; };
+		665BDBCF2B17DFED004DD21F /* ApolloSpotifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApolloSpotifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITests.swift; sourceTree = "<group>"; };
+		665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		669ED7632C668C2A00475D71 /* PlaylistGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistGridView.swift; sourceTree = "<group>"; };
+		669ED7662C69298800475D71 /* Color+Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Spotify.swift"; sourceTree = "<group>"; };
+		669ED7692C73ECA400475D71 /* ClientConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ClientConfig.plist; path = ApolloSpotify/ClientConfig.plist; sourceTree = SOURCE_ROOT; };
+		669ED76B2C7522E000475D71 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
+		669ED76D2C75233300475D71 /* TrackCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellView.swift; sourceTree = "<group>"; };
+		669ED7702C756C6800475D71 /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
+		669ED7722C7D14E200475D71 /* TimeInterval+Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Spotify.swift"; sourceTree = "<group>"; };
+		669ED7752C7D216700475D71 /* PlaylistAddTracksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddTracksView.swift; sourceTree = "<group>"; };
+		669ED7772C7D301E00475D71 /* PlaylistAddTracksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddTracksViewModel.swift; sourceTree = "<group>"; };
+		669ED77B2C86958100475D71 /* ActionMenuModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuModalView.swift; sourceTree = "<group>"; };
+		669ED7802C86978400475D71 /* ActionMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuItem.swift; sourceTree = "<group>"; };
+		669ED7822C869F0E00475D71 /* TrackCellActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellActionView.swift; sourceTree = "<group>"; };
+		66B91A8D2C536CFB00ADE4F5 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
+		66B91A8F2C57585F00ADE4F5 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		66B91A952C5FFDCF00ADE4F5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		66B91A972C5FFDFB00ADE4F5 /* AuthorizationInterceptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationInterceptor.swift; sourceTree = "<group>"; };
+		66B91A982C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorProvider.swift; sourceTree = "<group>"; };
+		66B91A9F2C619F7700ADE4F5 /* PlaylistGridCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistGridCellView.swift; sourceTree = "<group>"; };
+		66B91AA12C61AE8000ADE4F5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		66BD33C02B17F50D0045774E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		66BD33C62B1905F20045774E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		66BD33CA2B1925810045774E /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		665BDBB22B17DFEC004DD21F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66BD33BD2B17E4020045774E /* ApolloTestSupport in Frameworks */,
+				66BD33BF2B17E4020045774E /* ApolloWebSocket in Frameworks */,
+				66B91A932C5EE73400ADE4F5 /* SpotifyAPI in Frameworks */,
+				66BD33B92B17E4020045774E /* Apollo in Frameworks */,
+				66B91A9D2C6090BD00ADE4F5 /* SpotifyAPI in Frameworks */,
+				66BD33BB2B17E4020045774E /* ApolloSQLite in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBC22B17DFED004DD21F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBCC2B17DFED004DD21F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		665BDBAC2B17DFEC004DD21F = {
+			isa = PBXGroup;
+			children = (
+				665BDBB72B17DFEC004DD21F /* ApolloSpotify */,
+				665BDBC82B17DFED004DD21F /* ApolloSpotifyTests */,
+				665BDBD22B17DFED004DD21F /* ApolloSpotifyUITests */,
+				665BDBB62B17DFEC004DD21F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		665BDBB62B17DFEC004DD21F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				665BDBB52B17DFEC004DD21F /* ApolloSpotify.app */,
+				665BDBC52B17DFED004DD21F /* ApolloSpotifyTests.xctest */,
+				665BDBCF2B17DFED004DD21F /* ApolloSpotifyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		665BDBB72B17DFEC004DD21F /* ApolloSpotify */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7682C73EC9000475D71 /* Config */,
+				669ED7652C69297000475D71 /* Extensions */,
+				66B91A9E2C619F2300ADE4F5 /* Views */,
+				66B91A942C5EE79200ADE4F5 /* Network */,
+				66BD33C22B19040A0045774E /* Auth */,
+				665BDBB82B17DFEC004DD21F /* ApolloSpotifyApp.swift */,
+				665BDBBC2B17DFED004DD21F /* Assets.xcassets */,
+				665BDBBE2B17DFED004DD21F /* Preview Content */,
+				66BD33C02B17F50D0045774E /* MainTabView.swift */,
+			);
+			path = ApolloSpotify;
+			sourceTree = "<group>";
+		};
+		665BDBBE2B17DFED004DD21F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				665BDBBF2B17DFED004DD21F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		665BDBC82B17DFED004DD21F /* ApolloSpotifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				665BDBC92B17DFED004DD21F /* ApolloSpotifyTests.swift */,
+			);
+			path = ApolloSpotifyTests;
+			sourceTree = "<group>";
+		};
+		665BDBD22B17DFED004DD21F /* ApolloSpotifyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */,
+				665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */,
+			);
+			path = ApolloSpotifyUITests;
+			sourceTree = "<group>";
+		};
+		669ED7622C668C1500475D71 /* Playlists */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7742C7D215100475D71 /* AddTracks */,
+				669ED76F2C756C5500475D71 /* Grid */,
+				669ED76B2C7522E000475D71 /* PlaylistView.swift */,
+				669ED7702C756C6800475D71 /* PlaylistViewModel.swift */,
+			);
+			path = Playlists;
+			sourceTree = "<group>";
+		};
+		669ED7652C69297000475D71 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7662C69298800475D71 /* Color+Spotify.swift */,
+				669ED7722C7D14E200475D71 /* TimeInterval+Spotify.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		669ED7682C73EC9000475D71 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7692C73ECA400475D71 /* ClientConfig.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		669ED76F2C756C5500475D71 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7632C668C2A00475D71 /* PlaylistGridView.swift */,
+				66B91A9F2C619F7700ADE4F5 /* PlaylistGridCellView.swift */,
+			);
+			path = Grid;
+			sourceTree = "<group>";
+		};
+		669ED7742C7D215100475D71 /* AddTracks */ = {
+			isa = PBXGroup;
+			children = (
+				669ED7752C7D216700475D71 /* PlaylistAddTracksView.swift */,
+				669ED7772C7D301E00475D71 /* PlaylistAddTracksViewModel.swift */,
+			);
+			path = AddTracks;
+			sourceTree = "<group>";
+		};
+		669ED7792C822E8400475D71 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				669ED76D2C75233300475D71 /* TrackCellView.swift */,
+				669ED7822C869F0E00475D71 /* TrackCellActionView.swift */,
+			);
+			path = Tracks;
+			sourceTree = "<group>";
+		};
+		669ED77A2C86955800475D71 /* ActionMenu */ = {
+			isa = PBXGroup;
+			children = (
+				669ED77B2C86958100475D71 /* ActionMenuModalView.swift */,
+				669ED7802C86978400475D71 /* ActionMenuItem.swift */,
+			);
+			path = ActionMenu;
+			sourceTree = "<group>";
+		};
+		66B91A942C5EE79200ADE4F5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				66B91A972C5FFDFB00ADE4F5 /* AuthorizationInterceptor.swift */,
+				66B91A982C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift */,
+				66B91A952C5FFDCF00ADE4F5 /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		66B91A9E2C619F2300ADE4F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				669ED77A2C86955800475D71 /* ActionMenu */,
+				669ED7792C822E8400475D71 /* Tracks */,
+				669ED7622C668C1500475D71 /* Playlists */,
+				66BD33C52B1905DC0045774E /* Home */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		66BD33C22B19040A0045774E /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				66BD33CA2B1925810045774E /* AuthManager.swift */,
+				66B91A8D2C536CFB00ADE4F5 /* KeychainHandler.swift */,
+				66B91A8F2C57585F00ADE4F5 /* AccessToken.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		66BD33C52B1905DC0045774E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				66BD33C62B1905F20045774E /* HomeView.swift */,
+				66B91AA12C61AE8000ADE4F5 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		665BDBB42B17DFEC004DD21F /* ApolloSpotify */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 665BDBD92B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotify" */;
+			buildPhases = (
+				665BDBB12B17DFEC004DD21F /* Sources */,
+				665BDBB22B17DFEC004DD21F /* Frameworks */,
+				665BDBB32B17DFEC004DD21F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ApolloSpotify;
+			packageProductDependencies = (
+				66BD33B82B17E4020045774E /* Apollo */,
+				66BD33BA2B17E4020045774E /* ApolloSQLite */,
+				66BD33BC2B17E4020045774E /* ApolloTestSupport */,
+				66BD33BE2B17E4020045774E /* ApolloWebSocket */,
+				66B91A922C5EE73400ADE4F5 /* SpotifyAPI */,
+				66B91A9C2C6090BD00ADE4F5 /* SpotifyAPI */,
+			);
+			productName = ApolloSpotify;
+			productReference = 665BDBB52B17DFEC004DD21F /* ApolloSpotify.app */;
+			productType = "com.apple.product-type.application";
+		};
+		665BDBC42B17DFED004DD21F /* ApolloSpotifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 665BDBDC2B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotifyTests" */;
+			buildPhases = (
+				665BDBC12B17DFED004DD21F /* Sources */,
+				665BDBC22B17DFED004DD21F /* Frameworks */,
+				665BDBC32B17DFED004DD21F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				665BDBC72B17DFED004DD21F /* PBXTargetDependency */,
+			);
+			name = ApolloSpotifyTests;
+			productName = ApolloSpotifyTests;
+			productReference = 665BDBC52B17DFED004DD21F /* ApolloSpotifyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		665BDBCE2B17DFED004DD21F /* ApolloSpotifyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 665BDBDF2B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotifyUITests" */;
+			buildPhases = (
+				665BDBCB2B17DFED004DD21F /* Sources */,
+				665BDBCC2B17DFED004DD21F /* Frameworks */,
+				665BDBCD2B17DFED004DD21F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				665BDBD12B17DFED004DD21F /* PBXTargetDependency */,
+			);
+			name = ApolloSpotifyUITests;
+			productName = ApolloSpotifyUITests;
+			productReference = 665BDBCF2B17DFED004DD21F /* ApolloSpotifyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		665BDBAD2B17DFEC004DD21F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					665BDBB42B17DFEC004DD21F = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					665BDBC42B17DFED004DD21F = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 665BDBB42B17DFEC004DD21F;
+					};
+					665BDBCE2B17DFED004DD21F = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 665BDBB42B17DFEC004DD21F;
+					};
+				};
+			};
+			buildConfigurationList = 665BDBB02B17DFEC004DD21F /* Build configuration list for PBXProject "ApolloSpotify" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 665BDBAC2B17DFEC004DD21F;
+			packageReferences = (
+				66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				66B91A9B2C6090BD00ADE4F5 /* XCLocalSwiftPackageReference "SpotifyAPI" */,
+			);
+			productRefGroup = 665BDBB62B17DFEC004DD21F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				665BDBB42B17DFEC004DD21F /* ApolloSpotify */,
+				665BDBC42B17DFED004DD21F /* ApolloSpotifyTests */,
+				665BDBCE2B17DFED004DD21F /* ApolloSpotifyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		665BDBB32B17DFEC004DD21F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				665BDBC02B17DFED004DD21F /* Preview Assets.xcassets in Resources */,
+				669ED76A2C73ECA400475D71 /* ClientConfig.plist in Resources */,
+				665BDBBD2B17DFED004DD21F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBC32B17DFED004DD21F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBCD2B17DFED004DD21F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		665BDBB12B17DFEC004DD21F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				669ED7712C756C6800475D71 /* PlaylistViewModel.swift in Sources */,
+				669ED7812C86978400475D71 /* ActionMenuItem.swift in Sources */,
+				66BD33CB2B1925810045774E /* AuthManager.swift in Sources */,
+				66B91AA22C61AE8000ADE4F5 /* HomeViewModel.swift in Sources */,
+				66B91A992C5FFDFC00ADE4F5 /* AuthorizationInterceptor.swift in Sources */,
+				66BD33C72B1905F20045774E /* HomeView.swift in Sources */,
+				669ED7672C69298800475D71 /* Color+Spotify.swift in Sources */,
+				669ED7732C7D14E200475D71 /* TimeInterval+Spotify.swift in Sources */,
+				669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */,
+				66B91A9A2C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift in Sources */,
+				66B91AA02C619F7700ADE4F5 /* PlaylistGridCellView.swift in Sources */,
+				669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */,
+				669ED76C2C7522E000475D71 /* PlaylistView.swift in Sources */,
+				66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */,
+				665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */,
+				66BD33C12B17F50D0045774E /* MainTabView.swift in Sources */,
+				669ED7762C7D216700475D71 /* PlaylistAddTracksView.swift in Sources */,
+				66B91A962C5FFDCF00ADE4F5 /* Network.swift in Sources */,
+				669ED7832C869F0E00475D71 /* TrackCellActionView.swift in Sources */,
+				66B91A902C57585F00ADE4F5 /* AccessToken.swift in Sources */,
+				669ED7782C7D301E00475D71 /* PlaylistAddTracksViewModel.swift in Sources */,
+				669ED76E2C75233300475D71 /* TrackCellView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBC12B17DFED004DD21F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				665BDBCA2B17DFED004DD21F /* ApolloSpotifyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		665BDBCB2B17DFED004DD21F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				665BDBD62B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift in Sources */,
+				665BDBD42B17DFED004DD21F /* ApolloSpotifyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		665BDBC72B17DFED004DD21F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 665BDBB42B17DFEC004DD21F /* ApolloSpotify */;
+			targetProxy = 665BDBC62B17DFED004DD21F /* PBXContainerItemProxy */;
+		};
+		665BDBD12B17DFED004DD21F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 665BDBB42B17DFEC004DD21F /* ApolloSpotify */;
+			targetProxy = 665BDBD02B17DFED004DD21F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		665BDBD72B17DFED004DD21F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		665BDBD82B17DFED004DD21F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		665BDBDA2B17DFED004DD21F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ApolloSpotify/Preview Content\"";
+				DEVELOPMENT_TEAM = L3FHPF43MA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		665BDBDB2B17DFED004DD21F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ApolloSpotify/Preview Content\"";
+				DEVELOPMENT_TEAM = L3FHPF43MA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotify;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		665BDBDD2B17DFED004DD21F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ApolloSpotify.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ApolloSpotify";
+			};
+			name = Debug;
+		};
+		665BDBDE2B17DFED004DD21F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ApolloSpotify.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ApolloSpotify";
+			};
+			name = Release;
+		};
+		665BDBE02B17DFED004DD21F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotifyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ApolloSpotify;
+			};
+			name = Debug;
+		};
+		665BDBE12B17DFED004DD21F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.apollographql.ApolloSpotifyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ApolloSpotify;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		665BDBB02B17DFEC004DD21F /* Build configuration list for PBXProject "ApolloSpotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				665BDBD72B17DFED004DD21F /* Debug */,
+				665BDBD82B17DFED004DD21F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		665BDBD92B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotify" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				665BDBDA2B17DFED004DD21F /* Debug */,
+				665BDBDB2B17DFED004DD21F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		665BDBDC2B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				665BDBDD2B17DFED004DD21F /* Debug */,
+				665BDBDE2B17DFED004DD21F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		665BDBDF2B17DFED004DD21F /* Build configuration list for PBXNativeTarget "ApolloSpotifyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				665BDBE02B17DFED004DD21F /* Debug */,
+				665BDBE12B17DFED004DD21F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		66B91A9B2C6090BD00ADE4F5 /* XCLocalSwiftPackageReference "SpotifyAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = SpotifyAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		66B91A922C5EE73400ADE4F5 /* SpotifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SpotifyAPI;
+		};
+		66B91A9C2C6090BD00ADE4F5 /* SpotifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SpotifyAPI;
+		};
+		66BD33B82B17E4020045774E /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		66BD33BA2B17E4020045774E /* ApolloSQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloSQLite;
+		};
+		66BD33BC2B17E4020045774E /* ApolloTestSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloTestSupport;
+		};
+		66BD33BE2B17E4020045774E /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 66BD33B72B17E4020045774E /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 665BDBAD2B17DFEC004DD21F /* Project object */;
+}
