@@ -94,14 +94,6 @@ struct PlaylistView: View {
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
         .background(Color.init(hex: "121212"))
-        .sheet(isPresented: $addTracksPresented, content: {
-          PlaylistAddTracksView(
-            isPresented: $addTracksPresented,
-            recommendationInput: viewModel.getRecommendationInput(),
-            playlistID: viewModel.playlistID
-          )
-        })
-
         
         ForEach(0..<viewModel.playlistTracks.count, id: \.self) { index in
           TrackCellView(
@@ -115,12 +107,22 @@ struct PlaylistView: View {
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
         }
-        .sheet(item: $selectedTrack) { item in
-          trackActionMenu(item)
-            .presentationDetents([.medium])
-        }
       }
       .listStyle(.plain)
+      .sheet(isPresented: $addTracksPresented, content: {
+        PlaylistAddTracksView(
+          isPresented: $addTracksPresented,
+          recommendationInput: viewModel.getRecommendationInput(),
+          playlistID: viewModel.playlistID
+        )
+        .presentationCornerRadius(8)
+      })
+      .sheet(item: $selectedTrack) { item in
+        trackActionMenu(item)
+          .presentationDetents([.medium])
+          .presentationBackground(Color.init(hex: "212121"))
+          .presentationCornerRadius(8)
+      }
       
     }
     .padding(.all)

@@ -23,7 +23,8 @@ struct ActionMenuModalView: View {
       }
       .listStyle(.plain)
     }
-    .background(Color.init(hex: "535353"))
+    .background(Color.init(hex: "212121"))
+    .padding(.all)
   }
 }
 
