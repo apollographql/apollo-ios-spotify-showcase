@@ -154,7 +154,12 @@ struct PlaylistView: View {
     let removeTrackAction = ActionMenuItem(
       label: "Remove from this playlist",
       systemImageName: "x.circle") {
-        viewModel.removeTrackFromPlaylist(track)
+        viewModel.removeTrackFromPlaylist(
+          track) { success in
+            if success {
+              self.selectedTrack = nil
+            }
+          }
       }
     
     return ActionMenuModalView(

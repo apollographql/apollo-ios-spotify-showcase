@@ -68,7 +68,10 @@ class PlaylistViewModel: ObservableObject {
     return RecommendationSeedInput(seedTracks: .some(trackIDs))
   }
   
-  func removeTrackFromPlaylist(_ track: TrackFragment) {
+  func removeTrackFromPlaylist(
+    _ track: TrackFragment,
+    resultHandler: @escaping ((Bool) -> Void)
+  ) {
     let removeTrackInput = RemoveItemFromPlaylistTrackInput(uri: track.uri)
     let removeFromPlaylistInput = RemoveItemFromPlaylistInput(
       playlistId: playlistID,
@@ -80,11 +83,13 @@ class PlaylistViewModel: ObservableObject {
       case .success(let graphQLResult):
         print("Successfully removed track from playlist - \(graphQLResult.data?.removeItemFromPlaylist?.playlist?.id)")
         self?.removeTrackFromLocalCache(track)
-        
+        resultHandler(true)
+
         if let errors = graphQLResult.errors {
           print("RemoveItemFromPlaylistMutation errors - \(errors)")
         }
       case .failure(let error):
+        resultHandler(false)
         print("RemoveItemFromPlaylistMutation error - \(error)")
       }
     }
