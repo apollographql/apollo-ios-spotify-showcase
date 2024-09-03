@@ -1,4 +1,5 @@
 import Foundation
+import Apollo
 import SpotifyAPI
 import SwiftUI
 
@@ -29,12 +30,19 @@ class PlaylistViewModel: ObservableObject {
     }
   }
   
+  private var playlistWatcher: GraphQLQueryWatcher<PlaylistQuery>?
+  
   init(playlistID: SpotifyAPI.ID) {
     self.playlistID = playlistID
   }
   
+  deinit {
+    playlistWatcher?.cancel()
+  }
+  
   func fetchPlaylist() {
-    Network.shared.apollo.fetch(query: PlaylistQuery(playlistId: playlistID)) { [weak self] result in
+    playlistWatcher = Network.shared.apollo.watch(query: PlaylistQuery(playlistId: playlistID)) { [weak self] result in
+      print("Playlist Query result handled")
       switch result {
       case .success(let graphQLResult):
         if let playlist = graphQLResult.data?.playlist {
@@ -67,16 +75,35 @@ class PlaylistViewModel: ObservableObject {
       tracks: [removeTrackInput]
     )
     
-    Network.shared.apollo.perform(mutation: RemoveItemFromPlaylistMutation(input: removeFromPlaylistInput)) { result in
+    Network.shared.apollo.perform(mutation: RemoveItemFromPlaylistMutation(input: removeFromPlaylistInput)) { [weak self] result in
       switch result {
       case .success(let graphQLResult):
         print("Successfully removed track from playlist - \(graphQLResult.data?.removeItemFromPlaylist?.playlist?.id)")
+        self?.removeTrackFromLocalCache(track)
         
         if let errors = graphQLResult.errors {
           print("RemoveItemFromPlaylistMutation errors - \(errors)")
         }
       case .failure(let error):
         print("RemoveItemFromPlaylistMutation error - \(error)")
+      }
+    }
+  }
+  
+  private func removeTrackFromLocalCache(_ track: TrackFragment) {
+    Network.shared.apollo.store.withinReadWriteTransaction { [weak self] transaction in
+      guard let self = self else {
+        return
+      }
+      
+      let cacheMutation = PlaylistEditNodeLocalCacheMutation(playlistId: self.playlistID)
+      
+      do {
+        try transaction.update(cacheMutation) { (data: inout PlaylistEditNodeLocalCacheMutation.Data) in
+          data.playlist?.tracks.edges.removeAll { $0.node.asTrack?.id == track.id }
+        }
+      } catch {
+        print("Cache Mutation Error - \(error)")
       }
     }
   }

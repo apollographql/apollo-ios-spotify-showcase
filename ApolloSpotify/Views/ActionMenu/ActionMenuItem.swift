@@ -28,7 +28,7 @@ struct ActionMenuItem: View {
       Spacer()
     }
     .frame(height: 60)
-    .background(Color.init(hex: "535353"))
+    .background(Color.init(hex: "212121"))
   }
 }
 

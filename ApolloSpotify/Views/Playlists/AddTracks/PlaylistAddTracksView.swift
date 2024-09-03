@@ -7,11 +7,13 @@ struct PlaylistAddTracksView: View {
   @StateObject private var viewModel: PlaylistAddTracksViewModel
   @State private var searchText = ""
   
+  private let playlistID: SpotifyAPI.ID
+  
   init(
     isPresented: Binding<Bool>,
+    playlistID: SpotifyAPI.ID,
     recommendationInput: RecommendationSeedInput,
-    recommendationLimit: GraphQLNullable<Int> = .null,
-    playlistID: SpotifyAPI.ID
+    recommendationLimit: GraphQLNullable<Int> = .null
   ) {
     _isPresented = isPresented
     _viewModel = StateObject(wrappedValue: PlaylistAddTracksViewModel(
@@ -19,6 +21,7 @@ struct PlaylistAddTracksView: View {
       recommendationLimit: recommendationLimit,
       playlistID: playlistID
     ))
+    self.playlistID = playlistID
   }
   
   var body: some View {
@@ -58,6 +61,7 @@ struct PlaylistAddTracksView: View {
     .clipShape(.rect(cornerRadius: 8))
     
   }
+  
 }
 
 //#Preview {

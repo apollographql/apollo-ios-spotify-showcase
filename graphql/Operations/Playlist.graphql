@@ -23,3 +23,18 @@ query Playlist($playlistId: ID!) {
     }
   }
 }
+
+query PlaylistEditNodeLocalCacheMutation($playlistId: ID!) @apollo_client_ios_localCacheMutation {
+  playlist(id: $playlistId) {
+    id
+    tracks {
+      edges {
+        addedAt
+        node {
+          ...EpisodeFragment
+          ...TrackFragment
+        }
+      }
+    }
+  }
+}

@@ -112,8 +112,8 @@ struct PlaylistView: View {
       .sheet(isPresented: $addTracksPresented, content: {
         PlaylistAddTracksView(
           isPresented: $addTracksPresented,
-          recommendationInput: viewModel.getRecommendationInput(),
-          playlistID: viewModel.playlistID
+          playlistID: viewModel.playlistID,
+          recommendationInput: viewModel.getRecommendationInput()
         )
         .presentationCornerRadius(8)
       })
