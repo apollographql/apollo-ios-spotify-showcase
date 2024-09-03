@@ -86,28 +86,13 @@ class PlaylistAddTracksViewModel: ObservableObject {
             album: track.album
           )
           
-          var node = PlaylistEditNodeLocalCacheMutation.Data.Playlist.Tracks.Edge.Node(__typename: "Track")
-          node.asTrack = asTrack
-          
-          let edge = PlaylistEditNodeLocalCacheMutation.Data.Playlist.Tracks.Edge(node: node)
+          let edge = PlaylistEditNodeLocalCacheMutation.Data.Playlist.Tracks.Edge(node: asTrack.asRootEntityType)
           
           data.playlist?.tracks.edges.append(edge)
-          
-          print("End Cache mutation")
         }
-        
-        let queryData = try transaction.read(
-          query: PlaylistQuery(playlistId: playlistID)
-        )
-        
-        print("End Cache Mutation Track Count - \(queryData.playlist?.tracks.edges.count)")
-        print("End Cache Mutation Latest Track - \(queryData.playlist?.tracks.edges.last?.node.asTrack?.name)")
       } catch {
         print("Cache Mutation Error - \(error)")
       }
-      
-//      let queryData = try transaction.read(
-//        query: Pl)
     }
   }
   
