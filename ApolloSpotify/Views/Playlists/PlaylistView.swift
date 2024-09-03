@@ -5,6 +5,7 @@ struct PlaylistView: View {
   
   @StateObject private var viewModel: PlaylistViewModel
   @State var addTracksPresented: Bool = false
+  @State var selectedTrack: TrackFragment?
   
   init(playlistID: SpotifyAPI.ID) {
     _viewModel = StateObject(wrappedValue: PlaylistViewModel(playlistID: playlistID))
@@ -103,17 +104,21 @@ struct PlaylistView: View {
 
         
         ForEach(0..<viewModel.playlistTracks.count, id: \.self) { index in
-          TrackCellView(playlistTrack: viewModel.playlistTracks[index])
+          TrackCellView(
+            playlistTrack: viewModel.playlistTracks[index],
+            actionView: TrackCellActionView(
+              systemImageName: "ellipsis",
+              actionHandler: {
+                selectedTrack = viewModel.playlistTracks[index]
+              })
+          )
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
-            .onTapGesture {
-              print("Selected Track - \(viewModel.playlistTracks[index].name)")
-            }
         }
-        .onDelete(perform: { indexSet in
-          print("Deleting track - \(viewModel.playlistTracks[indexSet.first!].name)")
-          viewModel.removeTrackFromPlaylist(viewModel.playlistTracks[indexSet.first!])
-        })
+        .sheet(item: $selectedTrack) { item in
+          trackActionMenu(item)
+            .presentationDetents([.medium])
+        }
       }
       .listStyle(.plain)
       
@@ -142,7 +147,23 @@ struct PlaylistView: View {
       Spacer()
     }
   }
+  
+  private func trackActionMenu(_ track: TrackFragment) -> some View {
+    let removeTrackAction = ActionMenuItem(
+      label: "Remove from this playlist",
+      systemImageName: "x.circle") {
+        viewModel.removeTrackFromPlaylist(track)
+      }
+    
+    return ActionMenuModalView(
+      title: track.name,
+      menuItems: [
+        removeTrackAction
+      ])
+  }
 }
+
+extension TrackFragment: Identifiable {}
 
 //#Preview {
 //    PlaylistView()

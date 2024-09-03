@@ -4,6 +4,14 @@ import SpotifyAPI
 struct TrackCellView: View {
   
   let playlistTrack: TrackFragment
+  let actionView: TrackCellActionView?
+  
+  init(
+    playlistTrack: TrackFragment,
+    actionView: TrackCellActionView? = nil) {
+    self.playlistTrack = playlistTrack
+    self.actionView = actionView
+  }
   
   var body: some View {
     HStack {
@@ -33,6 +41,10 @@ struct TrackCellView: View {
       }
       
       Spacer()
+      
+      actionView
+        .frame(width: 20, height: 20)
+        .padding(.all)
     }
     .frame(height: 60)
     .background(Color.init(hex: "121212"))
