@@ -8,7 +8,9 @@ class PlaylistAddTracksViewModel: ObservableObject {
   let recommendationLimit: GraphQLNullable<Int>
   let playlistID: SpotifyAPI.ID
   
-  @Published var tracks = [TrackFragment]()
+  @Published var recommendedTracks = [TrackFragment]()
+  @Published var searchTracks = [TrackFragment]()
+  @Published var searchText = ""
   
   init(
     recommendationInput: RecommendationSeedInput,
@@ -26,12 +28,16 @@ class PlaylistAddTracksViewModel: ObservableObject {
         seeds: recommendationInput,
         limit: recommendationLimit)
     ) { [weak self] result in
+      guard let self = self else {
+        return
+      }
+      
       switch result {
       case .success(let graphQLResult):
         if let tracks = graphQLResult.data?.recommendations?.tracks {
-          self?.tracks = tracks.map { $0.fragments.trackFragment }
+          self.recommendedTracks = tracks.map { $0.fragments.trackFragment }
           
-          for t in self!.tracks {
+          for t in self.recommendedTracks {
             print("Track - \(t.name)")
           }
         }
@@ -43,6 +49,39 @@ class PlaylistAddTracksViewModel: ObservableObject {
           print("Recommendation error - \(error)")
       }
     }
+  }
+  
+  func searchCatalog(
+    queryString: String,
+    limit: GraphQLNullable<Int> = .null
+  ) {
+    Network.shared.apollo.fetch(
+      query: SearchQuery(
+        q: queryString,
+        type: [.init(SearchType.track)],
+        limit: limit)
+    ) { [weak self] result in
+      switch result {
+      case .success(let graphQLResult):
+        if let tracks = graphQLResult.data?.search?.tracks?.edges {
+          self?.searchTracks = tracks.map { $0.node.fragments.trackFragment }
+          
+          for t in self!.searchTracks {
+            print("Search Track - \(t.name)")
+          }
+        }
+        
+        if let errors = graphQLResult.errors {
+          print("Search track errors - \(errors)")
+        }
+      case .failure(let error):
+          print("Search error - \(error)")
+      }
+    }
+  }
+  
+  func cancelSearch() {
+    self.searchTracks = []
   }
   
   func addTrackToPlaylist(_ track: TrackFragment) {

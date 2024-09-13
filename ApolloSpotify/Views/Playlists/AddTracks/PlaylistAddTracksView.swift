@@ -5,7 +5,7 @@ struct PlaylistAddTracksView: View {
   
   @Binding var isPresented: Bool
   @StateObject private var viewModel: PlaylistAddTracksViewModel
-  @State private var searchText = ""
+  @State private var searchPresented: Bool = false
   
   private let playlistID: SpotifyAPI.ID
   
@@ -26,40 +26,70 @@ struct PlaylistAddTracksView: View {
   
   var body: some View {
     NavigationStack {
-      recommendedSongView()
+      VStack {
+        Text(searchPresented ? "Search Results" : "Suggested Songs")
+          .font(.system(size: 16, weight: .bold))
+          .foregroundStyle(.white)
+          .frame(maxWidth: .infinity, alignment: .leading)
+        
+        if searchPresented {
+          searchTrackListView()
+        } else {
+          recommendedTrackListView()
+        }
+      }
+      .padding(.all)
+      .background(Color.init(hex: "121212"))
+      .clipShape(.rect(cornerRadius: 8))
     }
     .padding(.all)
-    .searchable(text: $searchText)
+    .searchable(text: $viewModel.searchText, isPresented: $searchPresented)
+    .onSubmit(of: .search) {
+      guard !viewModel.searchText.isEmpty else {
+        return
+      }
+      
+      viewModel.searchCatalog(queryString: viewModel.searchText)
+    }
+    .onChange(of: searchPresented, { _, newValue in
+      if !newValue {
+        viewModel.cancelSearch()
+      }
+    })
     .task {
       viewModel.fetchRecommendations()
     }
 
   }
   
-  private func recommendedSongView() -> some View {
-    VStack {
-      Text("Suggested Songs")
-        .font(.system(size: 16, weight: .bold))
-        .foregroundStyle(.white)
-        .frame(maxWidth: .infinity, alignment: .leading)
-      
-      List {
-        ForEach(0..<viewModel.tracks.count, id: \.self) { index in
-          TrackCellView(playlistTrack: viewModel.tracks[index])
-            .listRowInsets(.init())
-            .listRowSeparator(.hidden)
-            .onTapGesture {
-              print("Selected Track - \(viewModel.tracks[index].name)")
-              viewModel.addTrackToPlaylist(viewModel.tracks[index])
-            }
-        }
+  private func recommendedTrackListView() -> some View {
+    List {
+      ForEach(0..<viewModel.recommendedTracks.count, id: \.self) { index in
+        TrackCellView(playlistTrack: viewModel.recommendedTracks[index])
+          .listRowInsets(.init())
+          .listRowSeparator(.hidden)
+          .onTapGesture {
+            print("Selected Track - \(viewModel.recommendedTracks[index].name)")
+            viewModel.addTrackToPlaylist(viewModel.recommendedTracks[index])
+          }
       }
-      .listStyle(.plain)
     }
-    .padding(.all)
-    .background(Color.init(hex: "121212"))
-    .clipShape(.rect(cornerRadius: 8))
-    
+    .listStyle(.plain)
+  }
+  
+  private func searchTrackListView() -> some View {
+    List {
+      ForEach(0..<viewModel.searchTracks.count, id: \.self) { index in
+        TrackCellView(playlistTrack: viewModel.searchTracks[index])
+          .listRowInsets(.init())
+          .listRowSeparator(.hidden)
+          .onTapGesture {
+            print("Selected Track - \(viewModel.searchTracks[index].name)")
+            viewModel.addTrackToPlaylist(viewModel.searchTracks[index])
+          }
+      }
+    }
+    .listStyle(.plain)
   }
   
 }

@@ -43,6 +43,9 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "Show": return SpotifyAPI.Objects.Show
     case "Mutation": return SpotifyAPI.Objects.Mutation
     case "RemoveItemFromPlaylistPayload": return SpotifyAPI.Objects.RemoveItemFromPlaylistPayload
+    case "SearchResults": return SpotifyAPI.Objects.SearchResults
+    case "SearchTracksConnection": return SpotifyAPI.Objects.SearchTracksConnection
+    case "SearchTrackEdge": return SpotifyAPI.Objects.SearchTrackEdge
     case "AddItemsToPlaylistPayload": return SpotifyAPI.Objects.AddItemsToPlaylistPayload
     default: return nil
     }
