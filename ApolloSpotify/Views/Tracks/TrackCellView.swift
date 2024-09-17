@@ -1,16 +1,17 @@
 import SwiftUI
 import SpotifyAPI
 
-struct TrackCellView: View {
+struct TrackCellView<ActionProvider: ActionViewProvider>: View {
   
   let playlistTrack: TrackFragment
-  let actionView: TrackCellActionView?
+  @StateObject var actionProvider: ActionProvider
   
   init(
     playlistTrack: TrackFragment,
-    actionView: TrackCellActionView? = nil) {
+    actionProvider: StateObject<ActionProvider>
+  ) {
     self.playlistTrack = playlistTrack
-    self.actionView = actionView
+    _actionProvider = actionProvider
   }
   
   var body: some View {
@@ -42,7 +43,7 @@ struct TrackCellView: View {
       
       Spacer()
       
-      actionView
+      actionProvider.actionView
         .frame(width: 20, height: 20)
         .padding(.all)
     }

@@ -24,7 +24,9 @@
 		669ED7782C7D301E00475D71 /* PlaylistAddTracksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7772C7D301E00475D71 /* PlaylistAddTracksViewModel.swift */; };
 		669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED77B2C86958100475D71 /* ActionMenuModalView.swift */; };
 		669ED7812C86978400475D71 /* ActionMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7802C86978400475D71 /* ActionMenuItem.swift */; };
-		669ED7832C869F0E00475D71 /* TrackCellActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7822C869F0E00475D71 /* TrackCellActionView.swift */; };
+		669ED78D2C99327F00475D71 /* ActionViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED78C2C99327F00475D71 /* ActionViewProvider.swift */; };
+		669ED7902C9A03D800475D71 /* TrackMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED78F2C9A03D800475D71 /* TrackMenuAction.swift */; };
+		669ED7922C9A21A000475D71 /* AddTrackToPlaylistAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7912C9A21A000475D71 /* AddTrackToPlaylistAction.swift */; };
 		66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A8D2C536CFB00ADE4F5 /* KeychainHandler.swift */; };
 		66B91A902C57585F00ADE4F5 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B91A8F2C57585F00ADE4F5 /* AccessToken.swift */; };
 		66B91A932C5EE73400ADE4F5 /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 66B91A922C5EE73400ADE4F5 /* SpotifyAPI */; };
@@ -81,7 +83,9 @@
 		669ED7772C7D301E00475D71 /* PlaylistAddTracksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistAddTracksViewModel.swift; sourceTree = "<group>"; };
 		669ED77B2C86958100475D71 /* ActionMenuModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuModalView.swift; sourceTree = "<group>"; };
 		669ED7802C86978400475D71 /* ActionMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionMenuItem.swift; sourceTree = "<group>"; };
-		669ED7822C869F0E00475D71 /* TrackCellActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellActionView.swift; sourceTree = "<group>"; };
+		669ED78C2C99327F00475D71 /* ActionViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionViewProvider.swift; sourceTree = "<group>"; };
+		669ED78F2C9A03D800475D71 /* TrackMenuAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMenuAction.swift; sourceTree = "<group>"; };
+		669ED7912C9A21A000475D71 /* AddTrackToPlaylistAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackToPlaylistAction.swift; sourceTree = "<group>"; };
 		66B91A8D2C536CFB00ADE4F5 /* KeychainHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHandler.swift; sourceTree = "<group>"; };
 		66B91A8F2C57585F00ADE4F5 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		66B91A952C5FFDCF00ADE4F5 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 		665BDBB72B17DFEC004DD21F /* ApolloSpotify */ = {
 			isa = PBXGroup;
 			children = (
+				669ED78B2C99325200475D71 /* Protocols */,
 				669ED7682C73EC9000475D71 /* Config */,
 				669ED7652C69297000475D71 /* Extensions */,
 				66B91A9E2C619F2300ADE4F5 /* Views */,
@@ -189,6 +194,7 @@
 		669ED7622C668C1500475D71 /* Playlists */ = {
 			isa = PBXGroup;
 			children = (
+				669ED78E2C9A03C900475D71 /* Actions */,
 				669ED7742C7D215100475D71 /* AddTracks */,
 				669ED76F2C756C5500475D71 /* Grid */,
 				669ED76B2C7522E000475D71 /* PlaylistView.swift */,
@@ -236,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				669ED76D2C75233300475D71 /* TrackCellView.swift */,
-				669ED7822C869F0E00475D71 /* TrackCellActionView.swift */,
 			);
 			path = Tracks;
 			sourceTree = "<group>";
@@ -248,6 +253,23 @@
 				669ED7802C86978400475D71 /* ActionMenuItem.swift */,
 			);
 			path = ActionMenu;
+			sourceTree = "<group>";
+		};
+		669ED78B2C99325200475D71 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				669ED78C2C99327F00475D71 /* ActionViewProvider.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		669ED78E2C9A03C900475D71 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				669ED78F2C9A03D800475D71 /* TrackMenuAction.swift */,
+				669ED7912C9A21A000475D71 /* AddTrackToPlaylistAction.swift */,
+			);
+			path = Actions;
 			sourceTree = "<group>";
 		};
 		66B91A942C5EE79200ADE4F5 /* Network */ = {
@@ -438,6 +460,7 @@
 				66BD33CB2B1925810045774E /* AuthManager.swift in Sources */,
 				66B91AA22C61AE8000ADE4F5 /* HomeViewModel.swift in Sources */,
 				66B91A992C5FFDFC00ADE4F5 /* AuthorizationInterceptor.swift in Sources */,
+				669ED78D2C99327F00475D71 /* ActionViewProvider.swift in Sources */,
 				66BD33C72B1905F20045774E /* HomeView.swift in Sources */,
 				669ED7672C69298800475D71 /* Color+Spotify.swift in Sources */,
 				669ED7732C7D14E200475D71 /* TimeInterval+Spotify.swift in Sources */,
@@ -446,12 +469,13 @@
 				66B91AA02C619F7700ADE4F5 /* PlaylistGridCellView.swift in Sources */,
 				669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */,
 				669ED76C2C7522E000475D71 /* PlaylistView.swift in Sources */,
+				669ED7902C9A03D800475D71 /* TrackMenuAction.swift in Sources */,
 				66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */,
 				665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */,
 				66BD33C12B17F50D0045774E /* MainTabView.swift in Sources */,
+				669ED7922C9A21A000475D71 /* AddTrackToPlaylistAction.swift in Sources */,
 				669ED7762C7D216700475D71 /* PlaylistAddTracksView.swift in Sources */,
 				66B91A962C5FFDCF00ADE4F5 /* Network.swift in Sources */,
-				669ED7832C869F0E00475D71 /* TrackCellActionView.swift in Sources */,
 				66B91A902C57585F00ADE4F5 /* AccessToken.swift in Sources */,
 				669ED7782C7D301E00475D71 /* PlaylistAddTracksViewModel.swift in Sources */,
 				669ED76E2C75233300475D71 /* TrackCellView.swift in Sources */,

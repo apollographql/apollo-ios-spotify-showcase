@@ -84,57 +84,6 @@ class PlaylistAddTracksViewModel: ObservableObject {
     self.searchTracks = []
   }
   
-  func addTrackToPlaylist(_ track: TrackFragment) {
-    let addTrackInput = AddItemsToPlaylistInput(
-      playlistId: playlistID,
-      uris: [track.uri]
-    )
-    
-    Network.shared.apollo.perform(mutation: AddItemsToPlaylistMutation(input: addTrackInput)) { [weak self] result in
-      switch result {
-      case .success(let graphQLResult):
-        print("Successfully added track to playlist - \(graphQLResult.data?.addItemsToPlaylist?.playlist?.id)")
-        self?.addTrackToLocalCache(track)
-        
-        if let errors = graphQLResult.errors {
-          print("AddItemsToPlaylistMutation errors - \(errors)")
-        }
-      case .failure(let error):
-        print("AddItemsToPlaylistMutation error - \(error)")
-      }
-    }
-  }
-  
-  
-  private func addTrackToLocalCache(_ track: TrackFragment) {
-    Network.shared.apollo.store.withinReadWriteTransaction { [weak self] transaction in
-      guard let self = self else {
-        return
-      }
-      
-      let cacheMutation = PlaylistEditNodeLocalCacheMutation(playlistId: self.playlistID)
-      
-      do {
-        try transaction.update(cacheMutation) { (data: inout PlaylistEditNodeLocalCacheMutation.Data) in
-          let asTrack = PlaylistEditNodeLocalCacheMutation.Data.Playlist.Tracks.Edge.Node.AsTrack(
-            id: track.id,
-            name: track.name,
-            durationMs: track.durationMs,
-            uri: track.uri,
-            artists: track.artists,
-            album: track.album
-          )
-          
-          let edge = PlaylistEditNodeLocalCacheMutation.Data.Playlist.Tracks.Edge(node: asTrack.asRootEntityType)
-          
-          data.playlist?.tracks.edges.append(edge)
-        }
-      } catch {
-        print("Cache Mutation Error - \(error)")
-      }
-    }
-  }
-  
 }
   
 

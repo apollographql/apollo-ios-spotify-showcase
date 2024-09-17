@@ -65,13 +65,12 @@ struct PlaylistAddTracksView: View {
   private func recommendedTrackListView() -> some View {
     List {
       ForEach(0..<viewModel.recommendedTracks.count, id: \.self) { index in
-        TrackCellView(playlistTrack: viewModel.recommendedTracks[index])
+        TrackCellView(
+          playlistTrack: viewModel.recommendedTracks[index],
+          actionProvider: actionProvider(forTrack: viewModel.recommendedTracks[index])
+        )
           .listRowInsets(.init())
           .listRowSeparator(.hidden)
-          .onTapGesture {
-            print("Selected Track - \(viewModel.recommendedTracks[index].name)")
-            viewModel.addTrackToPlaylist(viewModel.recommendedTracks[index])
-          }
       }
     }
     .listStyle(.plain)
@@ -80,16 +79,24 @@ struct PlaylistAddTracksView: View {
   private func searchTrackListView() -> some View {
     List {
       ForEach(0..<viewModel.searchTracks.count, id: \.self) { index in
-        TrackCellView(playlistTrack: viewModel.searchTracks[index])
+        TrackCellView(
+          playlistTrack: viewModel.searchTracks[index],
+          actionProvider: actionProvider(forTrack: viewModel.searchTracks[index])
+        )
           .listRowInsets(.init())
           .listRowSeparator(.hidden)
-          .onTapGesture {
-            print("Selected Track - \(viewModel.searchTracks[index].name)")
-            viewModel.addTrackToPlaylist(viewModel.searchTracks[index])
-          }
       }
     }
     .listStyle(.plain)
+  }
+  
+  private func actionProvider(forTrack track: TrackFragment) -> StateObject<AddTrackToPlaylistAction> {
+    return StateObject(
+      wrappedValue: AddTrackToPlaylistAction(
+        playlistID: viewModel.playlistID,
+        track: track
+      )
+    )
   }
   
 }

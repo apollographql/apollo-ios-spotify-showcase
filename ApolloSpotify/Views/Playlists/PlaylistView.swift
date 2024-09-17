@@ -98,11 +98,12 @@ struct PlaylistView: View {
         ForEach(0..<viewModel.playlistTracks.count, id: \.self) { index in
           TrackCellView(
             playlistTrack: viewModel.playlistTracks[index],
-            actionView: TrackCellActionView(
-              systemImageName: "ellipsis",
-              actionHandler: {
-                selectedTrack = viewModel.playlistTracks[index]
-              })
+            actionProvider: StateObject(
+              wrappedValue: TrackMenuAction(
+                track: viewModel.playlistTracks[index],
+                selectedTrack: $selectedTrack
+              )
+            )
           )
             .listRowInsets(.init())
             .listRowSeparator(.hidden)
