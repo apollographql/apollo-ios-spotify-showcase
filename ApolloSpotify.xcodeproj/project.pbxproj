@@ -13,6 +13,8 @@
 		665BDBCA2B17DFED004DD21F /* ApolloSpotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBC92B17DFED004DD21F /* ApolloSpotifyTests.swift */; };
 		665BDBD42B17DFED004DD21F /* ApolloSpotifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */; };
 		665BDBD62B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */; };
+		666C0CD32CB8A74A00E19A6E /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */; };
+		666C0CD52CB99A1800E19A6E /* NowPlayingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */; };
 		669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7632C668C2A00475D71 /* PlaylistGridView.swift */; };
 		669ED7672C69298800475D71 /* Color+Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7662C69298800475D71 /* Color+Spotify.swift */; };
 		669ED76A2C73ECA400475D71 /* ClientConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 669ED7692C73ECA400475D71 /* ClientConfig.plist */; };
@@ -72,6 +74,8 @@
 		665BDBCF2B17DFED004DD21F /* ApolloSpotifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApolloSpotifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITests.swift; sourceTree = "<group>"; };
 		665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewModel.swift; sourceTree = "<group>"; };
 		669ED7632C668C2A00475D71 /* PlaylistGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistGridView.swift; sourceTree = "<group>"; };
 		669ED7662C69298800475D71 /* Color+Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Spotify.swift"; sourceTree = "<group>"; };
 		669ED7692C73ECA400475D71 /* ClientConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ClientConfig.plist; path = ApolloSpotify/ClientConfig.plist; sourceTree = SOURCE_ROOT; };
@@ -191,6 +195,15 @@
 			path = ApolloSpotifyUITests;
 			sourceTree = "<group>";
 		};
+		666C0CD12CB8A72F00E19A6E /* NowPlaying */ = {
+			isa = PBXGroup;
+			children = (
+				666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */,
+				666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */,
+			);
+			path = NowPlaying;
+			sourceTree = "<group>";
+		};
 		669ED7622C668C1500475D71 /* Playlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +298,7 @@
 		66B91A9E2C619F2300ADE4F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				666C0CD12CB8A72F00E19A6E /* NowPlaying */,
 				669ED77A2C86955800475D71 /* ActionMenu */,
 				669ED7792C822E8400475D71 /* Tracks */,
 				669ED7622C668C1500475D71 /* Playlists */,
@@ -467,8 +481,10 @@
 				669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */,
 				66B91A9A2C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift in Sources */,
 				66B91AA02C619F7700ADE4F5 /* PlaylistGridCellView.swift in Sources */,
+				666C0CD52CB99A1800E19A6E /* NowPlayingViewModel.swift in Sources */,
 				669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */,
 				669ED76C2C7522E000475D71 /* PlaylistView.swift in Sources */,
+				666C0CD32CB8A74A00E19A6E /* NowPlayingView.swift in Sources */,
 				669ED7902C9A03D800475D71 /* TrackMenuAction.swift in Sources */,
 				66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */,
 				665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */,

@@ -12,5 +12,13 @@ extension TimeInterval {
   var minutes: Int {
     Int((self / 60).truncatingRemainder(dividingBy: 60))
   }
+  
+  var seconds: Int {
+    Int(self.truncatingRemainder(dividingBy: 60))
+  }
+  
+  var playbackTimestamp: String {
+    String(format: "%d:%02d", minutes, seconds)
+  }
 }
 
