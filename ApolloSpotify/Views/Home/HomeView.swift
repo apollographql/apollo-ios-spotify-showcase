@@ -5,6 +5,7 @@ import Apollo
 struct HomeView: View {
   
   @StateObject private var viewModel = HomeViewModel()
+  @State private var isNowPlayingPresented = false
   
   var body: some View {
 
@@ -16,7 +17,7 @@ struct HomeView: View {
           .frame(alignment: .leading)
         PlaylistGridView(playlists: $viewModel.playlists, numItems: 6)
         
-        Button("Get Profile") {
+        Button("Get Playlists") {
           
           Task {
             viewModel.fetchUserPlaylists()
@@ -32,6 +33,7 @@ struct HomeView: View {
         
         Spacer()
       }
+      .background(Color(hex: "#212121"))
     }
     
   }

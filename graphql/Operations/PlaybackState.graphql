@@ -1,0 +1,23 @@
+subscription PlaybackState {
+  playbackStateChanged {
+    context {
+      uri
+      type
+    }
+    device {
+      id
+      isActive
+      name
+      type
+    }
+    isPlaying
+    progressMs
+    repeatState
+    shuffleState
+    timestamp
+    item {
+      ...EpisodeFragment
+      ...TrackFragment
+    }
+  }
+}

@@ -1,14 +1,11 @@
 import Foundation
+import Apollo
 import SpotifyAPI
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
   
   @Published var playlists = [PlaylistFragment]()
-  
-  init() {
-    
-  }
   
   func fetchUserPlaylists() {
     Network.shared.apollo.fetch(query: UserPlaylistsQuery()) { [weak self] result in

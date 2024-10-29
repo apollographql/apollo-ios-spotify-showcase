@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		661856A12CD0101B00BA59D3 /* NowPlayingOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661856A02CD0101B00BA59D3 /* NowPlayingOverlayView.swift */; };
 		665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBB82B17DFEC004DD21F /* ApolloSpotifyApp.swift */; };
 		665BDBBD2B17DFED004DD21F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665BDBBC2B17DFED004DD21F /* Assets.xcassets */; };
 		665BDBC02B17DFED004DD21F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 665BDBBF2B17DFED004DD21F /* Preview Assets.xcassets */; };
 		665BDBCA2B17DFED004DD21F /* ApolloSpotifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBC92B17DFED004DD21F /* ApolloSpotifyTests.swift */; };
 		665BDBD42B17DFED004DD21F /* ApolloSpotifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */; };
 		665BDBD62B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */; };
+		666C0CD32CB8A74A00E19A6E /* NowPlayingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */; };
+		666C0CD52CB99A1800E19A6E /* NowPlayingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */; };
 		669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7632C668C2A00475D71 /* PlaylistGridView.swift */; };
 		669ED7672C69298800475D71 /* Color+Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669ED7662C69298800475D71 /* Color+Spotify.swift */; };
 		669ED76A2C73ECA400475D71 /* ClientConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 669ED7692C73ECA400475D71 /* ClientConfig.plist */; };
@@ -63,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		661856A02CD0101B00BA59D3 /* NowPlayingOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingOverlayView.swift; sourceTree = "<group>"; };
 		665BDBB52B17DFEC004DD21F /* ApolloSpotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApolloSpotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		665BDBB82B17DFEC004DD21F /* ApolloSpotifyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyApp.swift; sourceTree = "<group>"; };
 		665BDBBC2B17DFED004DD21F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 		665BDBCF2B17DFED004DD21F /* ApolloSpotifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApolloSpotifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		665BDBD32B17DFED004DD21F /* ApolloSpotifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITests.swift; sourceTree = "<group>"; };
 		665BDBD52B17DFED004DD21F /* ApolloSpotifyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloSpotifyUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingView.swift; sourceTree = "<group>"; };
+		666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewModel.swift; sourceTree = "<group>"; };
 		669ED7632C668C2A00475D71 /* PlaylistGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistGridView.swift; sourceTree = "<group>"; };
 		669ED7662C69298800475D71 /* Color+Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Spotify.swift"; sourceTree = "<group>"; };
 		669ED7692C73ECA400475D71 /* ClientConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ClientConfig.plist; path = ApolloSpotify/ClientConfig.plist; sourceTree = SOURCE_ROOT; };
@@ -191,6 +197,16 @@
 			path = ApolloSpotifyUITests;
 			sourceTree = "<group>";
 		};
+		666C0CD12CB8A72F00E19A6E /* NowPlaying */ = {
+			isa = PBXGroup;
+			children = (
+				666C0CD22CB8A74A00E19A6E /* NowPlayingView.swift */,
+				666C0CD42CB99A1800E19A6E /* NowPlayingViewModel.swift */,
+				661856A02CD0101B00BA59D3 /* NowPlayingOverlayView.swift */,
+			);
+			path = NowPlaying;
+			sourceTree = "<group>";
+		};
 		669ED7622C668C1500475D71 /* Playlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,6 +301,7 @@
 		66B91A9E2C619F2300ADE4F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				666C0CD12CB8A72F00E19A6E /* NowPlaying */,
 				669ED77A2C86955800475D71 /* ActionMenu */,
 				669ED7792C822E8400475D71 /* Tracks */,
 				669ED7622C668C1500475D71 /* Playlists */,
@@ -466,9 +483,12 @@
 				669ED7732C7D14E200475D71 /* TimeInterval+Spotify.swift in Sources */,
 				669ED7642C668C2A00475D71 /* PlaylistGridView.swift in Sources */,
 				66B91A9A2C5FFDFC00ADE4F5 /* NetworkInterceptorProvider.swift in Sources */,
+				661856A12CD0101B00BA59D3 /* NowPlayingOverlayView.swift in Sources */,
 				66B91AA02C619F7700ADE4F5 /* PlaylistGridCellView.swift in Sources */,
+				666C0CD52CB99A1800E19A6E /* NowPlayingViewModel.swift in Sources */,
 				669ED77C2C86958100475D71 /* ActionMenuModalView.swift in Sources */,
 				669ED76C2C7522E000475D71 /* PlaylistView.swift in Sources */,
+				666C0CD32CB8A74A00E19A6E /* NowPlayingView.swift in Sources */,
 				669ED7902C9A03D800475D71 /* TrackMenuAction.swift in Sources */,
 				66B91A8E2C536CFB00ADE4F5 /* KeychainHandler.swift in Sources */,
 				665BDBB92B17DFEC004DD21F /* ApolloSpotifyApp.swift in Sources */,
@@ -648,8 +668,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,8 +697,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
