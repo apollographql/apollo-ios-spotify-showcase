@@ -27,21 +27,13 @@ struct HomeView: View {
         
         Spacer()
         
-        Button("Now Playing") {
-          isNowPlayingPresented = true
-        }
-        .fullScreenCover(isPresented: $isNowPlayingPresented) {
-          NowPlayingView(viewModel: NowPlayingViewModel())
-        }
-        
-        Spacer()
-        
         Button("Clear Keychain") {
           _ = try? KeychainHandler.deleteToken()
         }
         
         Spacer()
       }
+      .background(Color(hex: "#212121"))
     }
     
   }

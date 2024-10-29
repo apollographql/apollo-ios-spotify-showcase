@@ -9,9 +9,10 @@ class NowPlayingViewModel: ObservableObject {
   @Published var albumName: String = ""
   @Published var trackName: String = ""
   @Published var artistName: String = ""
-  @Published var trackLengthMs: Int = 0
+  @Published var trackLengthMs: Int = 1
   @Published var trackProgressString: String = ""
   @Published var trackRemainingString: String = ""
+  @Published var isPlaying: Bool = false
   
   @Published var progressMs: Int = 0 {
     didSet {
@@ -57,6 +58,9 @@ class NowPlayingViewModel: ObservableObject {
         }
         if let trackProgress = graphQLResult.data?.playbackStateChanged?.progressMs {
           self.progressMs = trackProgress
+        }
+        if let isPlaying = graphQLResult.data?.playbackStateChanged?.isPlaying {
+          self.isPlaying = isPlaying
         }
         
         if let errors = graphQLResult.errors {
