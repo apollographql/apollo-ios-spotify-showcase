@@ -30,7 +30,7 @@
         "apolloRegistry": {
             "_0": {
                 "graphID": "Spotify-iOS",
-                "apiKey": "service:Spotify-iOS:V9SJX472KwCK1UKkI6SmPg",
+                "apiKey": "",
                 "variant": "current"
             }
         }
